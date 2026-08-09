@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { SquareComponent } from '../square/square.component';
 
 @Component({
   selector: 'app-chessboard',
   standalone: true,
-  imports: [],
+  imports: [SquareComponent],
   templateUrl: './chessboard.component.html',
   styleUrl: './chessboard.component.css'
 })
