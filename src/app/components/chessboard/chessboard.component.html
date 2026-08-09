@@ -1,1 +1,10 @@
-<p>chessboard works!</p>
+<section class="chessboard-container">
+    <div class="chessboard-body">
+        <div class="chessboard-content">
+            @for (square of squares; track square) {
+                <p>hello</p>
+            }
+        </div>
+        <ng-content select="[infos]" />
+    </div>
+</section>

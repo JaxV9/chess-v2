@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './chessboard.component.css'
 })
 export class ChessboardComponent {
-
+  squares = Array.from({ length: 64 }, (_, i) => i + 1);
 }
