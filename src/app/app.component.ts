@@ -3,11 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { ChessboardComponent } from './components/chessboard/chessboard.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, ChessboardComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [RouterOutlet, ChessboardComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'chess-v2';
