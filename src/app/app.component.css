@@ -1,0 +1,17 @@
+:host {
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: fit-content;
+        gap: 28px;
+    }
+
+    button {
+        width: 200px;
+        height: 50px;
+        font-size: 18px;
+    }
+}

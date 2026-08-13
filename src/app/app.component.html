@@ -1,1 +1,6 @@
-<app-chessboard />
+<div class="container">
+    <app-chessboard />
+    <button (click)="chessFacade.createGuest()">Create guest</button>
+    <button (click)="chessFacade.createGameSession()">Create game session</button>
+    <p>Session id :{{gameSession()}}</p>
+</div>
