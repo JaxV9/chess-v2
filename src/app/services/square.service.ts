@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class SquareColorService {
+export class SquareService {
   public colorManager(index: number) {
     let theme: string = '';
     const currentLine: number = Number.isInteger(index / 8) ? index / 8 - 1 : Math.floor(index / 8);

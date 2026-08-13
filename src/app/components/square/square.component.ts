@@ -1,16 +1,15 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { SquareColorService } from '../../services/square-color.service';
+import { SquareService } from '../../services/square.service';
 
 @Component({
-  selector: 'app-square',
-  standalone: true,
-  imports: [],
-  templateUrl: './square.component.html',
-  styleUrl: './square.component.css',
-  providers: [SquareColorService]
+    selector: 'app-square',
+    imports: [],
+    templateUrl: './square.component.html',
+    styleUrl: './square.component.css',
+    providers: [SquareService]
 })
 export class SquareComponent {
-  private squareColorService = inject(SquareColorService);
+  private squareService = inject(SquareService);
 
   currentIndex = input<number>();
 
@@ -18,6 +17,6 @@ export class SquareComponent {
     const index = this.currentIndex();
     if (!index) return;
 
-    return this.squareColorService.colorManager(index);
+    return this.squareService.colorManager(index);
   })
 }
