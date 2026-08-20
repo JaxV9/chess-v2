@@ -1,0 +1,8 @@
+<div class="container">
+    @if (gameSession()) {
+        <span>Session Id :</span>
+    }
+    @if (guest()) {
+        <span>Username : {{guest()?.username}}</span>
+    }
+</div>
