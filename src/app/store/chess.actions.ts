@@ -10,6 +10,8 @@ export const ChessActions = createActionGroup({
         'Create Guest': emptyProps(),
         'Load Guest': emptyProps(),
         'Set Guest': props<{ guest: Guest }>(),
+        'Remove Guest From Store': emptyProps(),
+        'Disconnect Guest': emptyProps(),
 
         'Create Game Session': emptyProps(),
         'Set Game Session': props<{ game_session: string }>(),

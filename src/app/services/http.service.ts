@@ -19,6 +19,12 @@ export class HttpService {
     });
   }
 
+  disconnectGuest() {
+    return this.http.post(`/api/guest/disconnect`, {},
+      { withCredentials: true }
+    )
+  }
+
   createGameSession() {
     return this.http.post<{ game_session: string }>(`/api/gamesession`, {},
       { withCredentials: true }

@@ -29,5 +29,9 @@ export const chessReducer = createReducer(
   on(ChessActions.setGuest, (state, { guest }) => ({
     ...state,
     guest
-  }))
+  })),
+  on(ChessActions.removeGuestFromStore, (state) => ({
+    ...state,
+    guest: undefined
+  })),
 );

@@ -24,6 +24,10 @@ export class ChessFacade {
         this.store.dispatch(ChessActions.loadGuest());
     }
 
+    disconnectGuest() {
+        this.store.dispatch(ChessActions.disconnectGuest());
+    }
+
     createGameSession() {
         this.store.dispatch(ChessActions.createGameSession());
     }

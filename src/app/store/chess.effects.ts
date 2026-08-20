@@ -75,4 +75,19 @@ export class ChessEffects {
             })
         )
     })
+
+    disconnectGuest = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ChessActions.disconnectGuest),
+            switchMap(() => {
+                return this.httpService.disconnectGuest().pipe(
+                    map(() => ChessActions.removeGuestFromStore()),
+                    catchError((error) => {
+                        console.error('Error while creating guest', error);
+                        return EMPTY;
+                    })
+                )
+            })
+        )
+    })
 }
