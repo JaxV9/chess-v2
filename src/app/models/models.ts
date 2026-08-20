@@ -12,6 +12,11 @@ export type Player = {
     ChessPiecesCaptured: ChessPiece[] | null,
 }
 
+export type Guest = {
+    id: string,
+    username: string
+}
+
 export type Move = {
     chessPieceId: string,
     player: Player,
