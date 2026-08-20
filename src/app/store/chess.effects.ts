@@ -51,7 +51,7 @@ export class ChessEffects {
                 ofType(ChessActions.createGuest),
                 switchMap(() => {
                     return this.httpService.createGuest().pipe(
-                        tap((response) => console.log(response)),
+                        map((response) => ChessActions.setGuest({ guest: response })),
                         catchError((error) => {
                             console.error('Error while creating guest', error);
                             return EMPTY;
@@ -59,8 +59,7 @@ export class ChessEffects {
                     );
                 })
             );
-        },
-        { dispatch: false }
+        }
     );
 
     loadGuest = createEffect(() => {
@@ -70,7 +69,6 @@ export class ChessEffects {
                 return this.httpService.getGuest().pipe(
                     map((response) => ChessActions.setGuest({ guest: response })),
                     catchError((error) => {
-                        console.error('Error while guetting guest', error);
                         return EMPTY;
                     })
                 )

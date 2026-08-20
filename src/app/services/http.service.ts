@@ -8,7 +8,7 @@ export class HttpService {
   private http = inject(HttpClient);
 
   createGuest() {
-    return this.http.post(`/api/guest`, {},
+    return this.http.post<{ id: string, username: string }>(`/api/guest`, {},
       { withCredentials: true }
     )
   }
