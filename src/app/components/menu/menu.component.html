@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="menu">
+        <h2>Menu</h2>
+        <div class="menu-navigation">
+            @if (!isGuestOrLogged()) {
+                <button (click)="chessFacade.createGuest()">Play as a guest</button>
+                <button>Login</button>
+                <button>Create account</button>
+            }
+            @if(isGuestOrLogged()) {
+                <button (click)="chessFacade.disconnectGuest()">Disconnect</button>
+            }
+        </div>
+    </div>
+</div>

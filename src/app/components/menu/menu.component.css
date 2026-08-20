@@ -1,0 +1,39 @@
+:host {
+    .container {
+        position: absolute;
+        display: flex;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(121, 117, 117, 0.47);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(7.6px);
+        -webkit-backdrop-filter: blur(7.6px);
+    }
+
+    .menu {
+        display: flex;
+        gap: 28px;
+        flex-direction: column;
+        padding: 32px 16px;
+        margin: auto;
+        width: 300px;
+        height: fit-content;
+        border-radius: 16px;
+        background-color: rgb(237, 235, 235);
+    }
+
+    .menu-navigation {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 90%;
+        margin: auto;
+    }
+
+    h2 {
+        text-align: center;
+        margin: 0;
+    }
+}
