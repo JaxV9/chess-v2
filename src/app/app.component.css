@@ -1,17 +1,18 @@
 :host {
-    .container {
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        width: fit-content;
-        gap: 28px;
-    }
 
-    button {
-        width: 200px;
-        height: 50px;
-        font-size: 18px;
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            gap: 28px;
+            justify-content: center;
+            align-content: center;
+        }
+
+        button {
+            width: fit-content;
+            height: fit-content;
+            font-size: 14px;
+        }
     }
-}
