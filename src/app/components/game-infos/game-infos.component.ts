@@ -10,7 +10,4 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class GameInfosComponent {
   chessFacade = inject(ChessFacade);
-
-  gameSession = toSignal(this.chessFacade.gameSession$);
-  guest = toSignal(this.chessFacade.guest$);
 }
