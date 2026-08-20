@@ -62,4 +62,19 @@ export class ChessEffects {
         },
         { dispatch: false }
     );
+
+    loadGuest = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ChessActions.loadGuest),
+            switchMap(() => {
+                return this.httpService.getGuest().pipe(
+                    map((response) => ChessActions.setGuest({ guest: response })),
+                    catchError((error) => {
+                        console.error('Error while guetting guest', error);
+                        return EMPTY;
+                    })
+                )
+            })
+        )
+    })
 }

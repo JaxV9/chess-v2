@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +11,12 @@ export class HttpService {
     return this.http.post(`/api/guest`, {},
       { withCredentials: true }
     )
+  }
+
+  getGuest() {
+    return this.http.get<{ id: string, username: string }>(`/api/guest`, {
+      withCredentials: true,
+    });
   }
 
   createGameSession() {

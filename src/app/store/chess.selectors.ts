@@ -12,3 +12,8 @@ export const selectGetGameSession = createSelector(
   selectChessState,
   (state) => state?.game_session
 )
+
+export const selectGuest = createSelector(
+  selectChessState,
+  (state) => state?.guest
+)

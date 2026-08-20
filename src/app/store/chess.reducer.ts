@@ -1,16 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
-import { ChessPiece } from '../models/models';
+import { ChessPiece, Guest } from '../models/models';
 import { ChessActions } from './chess.actions';
 
 
 export interface ChessState {
   pieces: ChessPiece[];
-  game_session: string | undefined
+  game_session: string | undefined;
+  guest: Guest | undefined;
 }
 
 export const initialState: ChessState = {
   pieces: [],
-  game_session: undefined
+  game_session: undefined,
+  guest: undefined
 };
 
 
@@ -24,4 +26,8 @@ export const chessReducer = createReducer(
     ...state,
     game_session
   })),
+  on(ChessActions.setGuest, (state, { guest }) => ({
+    ...state,
+    guest
+  }))
 );

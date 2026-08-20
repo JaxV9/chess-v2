@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { ChessPiece } from "../models/models"
 import { ChessWebsocketService } from "../services/websocket.service";
 import { ChessActions } from './chess.actions';
-import { selectChessPieces, selectGetGameSession } from './chess.selectors';
+import { selectChessPieces, selectGetGameSession, selectGuest } from './chess.selectors';
 
 @Injectable({
     providedIn: 'root'
@@ -14,9 +14,14 @@ export class ChessFacade {
 
     chessPieces$ = this.store.select(selectChessPieces);
     gameSession$ = this.store.select(selectGetGameSession);
+    guest$ = this.store.select(selectGuest);
 
     createGuest() {
         this.store.dispatch(ChessActions.createGuest());
+    }
+
+    loadGuest() {
+        this.store.dispatch(ChessActions.loadGuest());
     }
 
     createGameSession() {
