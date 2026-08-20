@@ -8,10 +8,16 @@ export const ChessActions = createActionGroup({
         'Sync Ws Chess Pieces': emptyProps(),
 
         'Create Guest': emptyProps(),
+        'Create Guest Success': emptyProps(),
+        'Create Guest Failure': emptyProps(),
+
         'Load Guest': emptyProps(),
+
         'Set Guest': props<{ guest: Guest }>(),
+
         'Remove Guest From Store': emptyProps(),
         'Disconnect Guest': emptyProps(),
+
 
         'Create Game Session': emptyProps(),
         'Set Game Session': props<{ game_session: string }>(),

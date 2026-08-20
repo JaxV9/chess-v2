@@ -17,3 +17,18 @@ export const selectGuest = createSelector(
   selectChessState,
   (state) => state?.guest
 )
+
+export const selectCreateGuestLoading = createSelector(
+  selectChessState,
+  (state) => state?.loadingStates.createGuestLoading
+)
+
+export const selectDisconnectGuestLoading = createSelector(
+  selectChessState,
+  (state) => state?.loadingStates.disconnectGuestLoading
+)
+
+export const selectLoadGuestLoading = createSelector(
+  selectChessState,
+  (state) => state?.loadingStates.loadGuestLoading
+)

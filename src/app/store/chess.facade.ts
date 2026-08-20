@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { ChessPiece } from "../models/models"
 import { ChessWebsocketService } from "../services/websocket.service";
 import { ChessActions } from './chess.actions';
-import { selectChessPieces, selectGetGameSession, selectGuest } from './chess.selectors';
+import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGetGameSession, selectGuest, selectLoadGuestLoading } from './chess.selectors';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
     providedIn: 'root'
@@ -12,9 +13,12 @@ export class ChessFacade {
     private store = inject(Store);
     private websocketService = inject(ChessWebsocketService);
 
-    chessPieces$ = this.store.select(selectChessPieces);
-    gameSession$ = this.store.select(selectGetGameSession);
-    guest$ = this.store.select(selectGuest);
+    chessPieces = toSignal(this.store.select(selectChessPieces));
+    gameSession = toSignal(this.store.select(selectGetGameSession));
+    guest = toSignal(this.store.select(selectGuest));
+    createGuestLoading = toSignal(this.store.select(selectCreateGuestLoading));
+    disconnectGuestLoading = toSignal(this.store.select(selectDisconnectGuestLoading));
+    loadGuestLoading = toSignal(this.store.select(selectLoadGuestLoading));
 
     createGuest() {
         this.store.dispatch(ChessActions.createGuest());

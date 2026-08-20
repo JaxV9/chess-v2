@@ -51,10 +51,12 @@ export class ChessEffects {
                 ofType(ChessActions.createGuest),
                 switchMap(() => {
                     return this.httpService.createGuest().pipe(
-                        map((response) => ChessActions.setGuest({ guest: response })),
-                        catchError((error) => {
-                            console.error('Error while creating guest', error);
-                            return EMPTY;
+                        switchMap((response) => [
+                            ChessActions.setGuest({ guest: response }),
+                            ChessActions.createGuestSuccess(),
+                        ]),
+                        catchError(() => {
+                            return of(ChessActions.createGuestFailure());
                         })
                     );
                 })
