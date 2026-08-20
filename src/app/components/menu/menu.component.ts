@@ -1,20 +1,24 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { ChessFacade } from '../../store/chess.facade';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-menu',
-  imports: [],
+  imports: [MatProgressSpinnerModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css',
 })
 export class MenuComponent implements OnInit {
   chessFacade = inject(ChessFacade);
 
-  guest = toSignal(this.chessFacade.guest$);
-
   isGuestOrLogged = computed(() => {
-    return this.guest();
+    return this.chessFacade.guest();
+  })
+
+  isMenuLoading = computed(() => {
+    const createGuestLoading = this.chessFacade.createGuestLoading();
+    const disconnectGuestLoading = this.chessFacade.disconnectGuestLoading();
+    return createGuestLoading || disconnectGuestLoading
   })
 
   ngOnInit(): void {

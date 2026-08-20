@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { ChessPiece, Guest } from '../models/models';
+import { ChessPiece, Guest, LoadingStates } from '../models/models';
 import { ChessActions } from './chess.actions';
 
 
@@ -7,12 +7,18 @@ export interface ChessState {
   pieces: ChessPiece[];
   game_session: string | undefined;
   guest: Guest | undefined;
+  loadingStates: LoadingStates
 }
 
 export const initialState: ChessState = {
   pieces: [],
   game_session: undefined,
-  guest: undefined
+  guest: undefined,
+  loadingStates: {
+    createGuestLoading: false,
+    loadGuestLoading: false,
+    disconnectGuestLoading: false,
+  }
 };
 
 
@@ -30,8 +36,33 @@ export const chessReducer = createReducer(
     ...state,
     guest
   })),
+  on(ChessActions.disconnectGuest, (state) => ({
+    ...state,
+    loadingStates: {
+      ...state.loadingStates,
+      disconnectGuestLoading: true,
+    }
+  })),
   on(ChessActions.removeGuestFromStore, (state) => ({
     ...state,
-    guest: undefined
+    guest: undefined,
+    loadingStates: {
+      ...state.loadingStates,
+      disconnectGuestLoading: false,
+    }
+  })),
+  on(ChessActions.createGuest, (state) => ({
+    ...state,
+    loadingStates: {
+      ...state.loadingStates,
+      createGuestLoading: true,
+    }
+  })),
+  on(ChessActions.createGuestSuccess, ChessActions.createGuestFailure, (state) => ({
+    ...state,
+    loadingStates: {
+      ...state.loadingStates,
+      createGuestLoading: false,
+    }
   })),
 );

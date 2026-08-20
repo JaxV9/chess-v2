@@ -2,13 +2,17 @@
     <div class="menu">
         <h2>Menu</h2>
         <div class="menu-navigation">
-            @if (!isGuestOrLogged()) {
-                <button (click)="chessFacade.createGuest()">Play as a guest</button>
-                <button>Login</button>
-                <button>Create account</button>
-            }
-            @if(isGuestOrLogged()) {
-                <button (click)="chessFacade.disconnectGuest()">Disconnect</button>
+            @if (isMenuLoading()) {
+                <mat-spinner diameter="50" />
+            } @else {
+                @if (!isGuestOrLogged()) {
+                    <button (click)="chessFacade.createGuest()">Play as a guest</button>
+                    <button>Login</button>
+                    <button>Create account</button>
+                }
+                @if(isGuestOrLogged()) {
+                    <button (click)="chessFacade.disconnectGuest()">Disconnect</button>
+                }
             }
         </div>
     </div>
