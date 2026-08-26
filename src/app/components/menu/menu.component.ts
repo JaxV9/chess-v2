@@ -18,6 +18,11 @@ export class MenuComponent {
   isMenuLoading = computed(() => {
     const createGuestLoading = this.chessFacade.createGuestLoading();
     const disconnectGuestLoading = this.chessFacade.disconnectGuestLoading();
-    return createGuestLoading || disconnectGuestLoading
+    const selectLoadInfosLoading = this.chessFacade.loadInfosLoading();
+    return createGuestLoading || disconnectGuestLoading || selectLoadInfosLoading
+  })
+
+  haveGameSession = computed(() => {
+    return this.chessFacade.gameSession();
   })
 }

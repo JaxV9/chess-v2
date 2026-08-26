@@ -15,6 +15,8 @@ export const ChessActions = createActionGroup({
 
         'Load Infos': emptyProps(),
 
+        'Load Infos Error': emptyProps(),
+
         'Set Guest': props<{ guest: Guest }>(),
 
         'Set Infos': props<{ game_session: string }>(),

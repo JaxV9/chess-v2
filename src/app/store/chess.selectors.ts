@@ -32,3 +32,8 @@ export const selectLoadGuestLoading = createSelector(
   selectChessState,
   (state) => state?.loadingStates.loadGuestLoading
 )
+
+export const selectLoadInfosLoading = createSelector(
+  selectChessState,
+  (state) => state?.loadingStates.getInfosLoading
+)

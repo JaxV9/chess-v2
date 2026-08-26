@@ -84,9 +84,7 @@ export class ChessEffects {
             switchMap(() => {
                 return this.httpService.getInfos().pipe(
                     map((response) => ChessActions.setInfos({ game_session: response.game_session })),
-                    catchError(() => {
-                        return EMPTY;
-                    })
+                    catchError(() => of(ChessActions.loadInfosError()))
                 )
             })
         )

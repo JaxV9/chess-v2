@@ -18,6 +18,7 @@ export const initialState: ChessState = {
     createGuestLoading: false,
     loadGuestLoading: false,
     disconnectGuestLoading: false,
+    getInfosLoading: true,
   }
 };
 
@@ -36,9 +37,27 @@ export const chessReducer = createReducer(
     ...state,
     guest
   })),
+  on(ChessActions.loadInfos, (state) => ({
+    ...state,
+    loadingStates: {
+      ...state.loadingStates,
+      getInfosLoading: true,
+    }
+  })),
+  on(ChessActions.loadInfosError, (state) => ({
+    ...state,
+    loadingStates: {
+      ...state.loadingStates,
+      getInfosLoading: false,
+    }
+  })),
   on(ChessActions.setInfos, (state, { game_session }) => ({
     ...state,
-    game_session
+    game_session,
+    loadingStates: {
+      ...state.loadingStates,
+      getInfosLoading: false,
+    }
   })),
   on(ChessActions.disconnectGuest, (state) => ({
     ...state,

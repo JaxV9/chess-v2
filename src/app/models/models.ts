@@ -46,5 +46,6 @@ export interface ApiResponse {
 export interface LoadingStates {
     createGuestLoading: boolean,
     loadGuestLoading: boolean,
-    disconnectGuestLoading: boolean
+    disconnectGuestLoading: boolean,
+    getInfosLoading: boolean,
 }
