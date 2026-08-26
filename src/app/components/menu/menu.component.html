@@ -11,6 +11,8 @@
                     <button>Create account</button>
                 }
                 @if(isGuestOrLogged()) {
+                    <button (click)="chessFacade.createGameSession()">Play online with another player</button>
+                    <button>Play locally with an AI</button>
                     <button (click)="chessFacade.disconnectGuest()">Disconnect</button>
                 }
             }

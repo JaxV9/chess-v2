@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ChessFacade } from '../../store/chess.facade';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -8,7 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css',
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
   chessFacade = inject(ChessFacade);
 
   isGuestOrLogged = computed(() => {
@@ -20,8 +20,4 @@ export class MenuComponent implements OnInit {
     const disconnectGuestLoading = this.chessFacade.disconnectGuestLoading();
     return createGuestLoading || disconnectGuestLoading
   })
-
-  ngOnInit(): void {
-    this.chessFacade.loadGuest();
-  }
 }

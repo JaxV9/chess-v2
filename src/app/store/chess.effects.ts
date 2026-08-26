@@ -78,6 +78,20 @@ export class ChessEffects {
         )
     })
 
+    loadInfos = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ChessActions.loadInfos),
+            switchMap(() => {
+                return this.httpService.getInfos().pipe(
+                    map((response) => ChessActions.setInfos({ game_session: response.game_session })),
+                    catchError(() => {
+                        return EMPTY;
+                    })
+                )
+            })
+        )
+    })
+
     disconnectGuest = createEffect(() => {
         return this.actions$.pipe(
             ofType(ChessActions.disconnectGuest),

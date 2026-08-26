@@ -28,6 +28,10 @@ export class ChessFacade {
         this.store.dispatch(ChessActions.loadGuest());
     }
 
+    loadInfos() {
+        this.store.dispatch(ChessActions.loadInfos());
+    }
+
     disconnectGuest() {
         this.store.dispatch(ChessActions.disconnectGuest());
     }

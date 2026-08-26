@@ -13,7 +13,11 @@ export const ChessActions = createActionGroup({
 
         'Load Guest': emptyProps(),
 
+        'Load Infos': emptyProps(),
+
         'Set Guest': props<{ guest: Guest }>(),
+
+        'Set Infos': props<{ game_session: string }>(),
 
         'Remove Guest From Store': emptyProps(),
         'Disconnect Guest': emptyProps(),

@@ -1,6 +1,6 @@
 <div class="container">
     @if (chessFacade.gameSession()) {
-        <span>Session Id :</span>
+        <span>Game session : {{chessFacade.gameSession()}}</span>
     }
     @if (chessFacade.guest()) {
         <span>Username : {{chessFacade.guest()?.username}}</span>

@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ChessboardComponent } from './components/chessboard/chessboard.component';
 import { ChessFacade } from './store/chess.facade';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { MenuComponent } from './components/menu/menu.component';
 import { GameInfosComponent } from './components/game-infos/game-infos.component';
 
@@ -11,6 +10,13 @@ import { GameInfosComponent } from './components/game-infos/game-infos.component
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'chess-v2';
+
+  chessFacade = inject(ChessFacade);
+
+  ngOnInit(): void {
+    this.chessFacade.loadGuest();
+    this.chessFacade.loadInfos();
+  }
 }

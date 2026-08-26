@@ -25,6 +25,12 @@ export class HttpService {
     )
   }
 
+  getInfos() {
+    return this.http.get<{ game_session: string }>(`/api/infos`, {
+      withCredentials: true
+    })
+  }
+
   createGameSession() {
     return this.http.post<{ game_session: string }>(`/api/gamesession`, {},
       { withCredentials: true }
