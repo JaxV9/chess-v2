@@ -5,7 +5,8 @@ export const ChessActions = createActionGroup({
     source: 'Chess',
     events: {
         'Set Chess Pieces': props<{ pieces: ChessPiece[] }>(),
-        'Sync Ws Chess Pieces': emptyProps(),
+        'Sync Ws Chess Pieces': props<{ gameSessionId: string }>(),
+        'Ws Connection Error': emptyProps(),
 
         'Create Guest': emptyProps(),
         'Create Guest Success': emptyProps(),
@@ -14,7 +15,6 @@ export const ChessActions = createActionGroup({
         'Load Guest': emptyProps(),
 
         'Load Infos': emptyProps(),
-
         'Load Infos Error': emptyProps(),
 
         'Set Guest': props<{ guest: Guest }>(),
@@ -26,6 +26,7 @@ export const ChessActions = createActionGroup({
 
 
         'Create Game Session': emptyProps(),
+        'Create Game Session Failure': emptyProps(),
         'Set Game Session': props<{ game_session: string }>(),
         'Get Game Session': emptyProps(),
 

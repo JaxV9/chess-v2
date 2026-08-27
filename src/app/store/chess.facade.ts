@@ -50,10 +50,6 @@ export class ChessFacade {
         this.store.dispatch(ChessActions.createGameSession());
     }
 
-    getChess() {
-        this.store.dispatch(ChessActions.syncWsChessPieces());
-    }
-
     updateChessPosition(chess: ChessPiece) {
         const formatData: { action: string, pieces: ChessPiece[] } = {
             action: "move",

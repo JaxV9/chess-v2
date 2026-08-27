@@ -16,13 +16,13 @@ export class ChessEffects {
     wsConnection$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(ChessActions.syncWsChessPieces),
-            switchMap(() => {
-                const wsUrl = `${this.websocketService.baseUrl}/ws/chess`;
+            switchMap((action: { gameSessionId: string }) => {
+                const wsUrl = `${this.websocketService.baseUrl}/ws/chess/${action.gameSessionId}`;
                 return this.websocketService.connect(wsUrl).pipe(
                     map((response) => ChessActions.setChessPieces({ pieces: response.data as ChessPiece[] })),
                     catchError((error) => {
                         console.error('WebSocket connection error:', error);
-                        return of({ type: '[Chess] WS Connection Error' });
+                        return of(ChessActions.wsConnectionError());
                     })
                 );
             })
@@ -34,13 +34,14 @@ export class ChessEffects {
             ofType(ChessActions.createGameSession),
             switchMap(() => {
                 return this.httpService.createGameSession().pipe(
-                    switchMap((response) => [
+                    switchMap((response) => of(
                         ChessActions.setGameSession({ game_session: response.game_session }),
-                        ChessActions.startGame()
-                    ]),
+                        ChessActions.startGame(),
+                        ChessActions.syncWsChessPieces({ gameSessionId: response.game_session })
+                    )),
                     catchError((error) => {
-                        console.error('Create game session error')
-                        return of({ type: '[Chess] Create game session error' })
+                        console.error('Create game session error', error);
+                        return of(ChessActions.createGameSessionFailure());
                     })
                 )
 
@@ -54,10 +55,10 @@ export class ChessEffects {
                 ofType(ChessActions.createGuest),
                 switchMap(() => {
                     return this.httpService.createGuest().pipe(
-                        switchMap((response) => [
+                        switchMap((response) => of(
                             ChessActions.setGuest({ guest: response }),
                             ChessActions.createGuestSuccess(),
-                        ]),
+                        )),
                         catchError(() => {
                             return of(ChessActions.createGuestFailure());
                         })
