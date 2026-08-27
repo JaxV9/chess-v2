@@ -36,4 +36,10 @@ export class HttpService {
       { withCredentials: true }
     )
   }
+
+  joinGameSession(gameSessionId: string) {
+    return this.http.post<{ game_session: string }>(`/api/gamesession/join/${gameSessionId}`, {},
+      { withCredentials: true }
+    )
+  }
 }

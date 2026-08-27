@@ -49,6 +49,23 @@ export class ChessEffects {
         )
     })
 
+    joinGameSession = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ChessActions.joinGameSession),
+            switchMap((action) =>
+                this.httpService.joinGameSession(action.game_session).pipe(
+                    switchMap((response) => of(
+                        ChessActions.joinGameSessionSuccess(),
+                        ChessActions.startGame(),
+                        ChessActions.setGameSession({ game_session: response.game_session }),
+                        ChessActions.syncWsChessPieces({ gameSessionId: response.game_session })
+                    )),
+                    catchError(() => of(ChessActions.joinGameSessionFailure()))
+                )
+            )
+        )
+    })
+
     createGuest = createEffect(
         () => {
             return this.actions$.pipe(

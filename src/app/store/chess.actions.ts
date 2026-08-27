@@ -27,8 +27,13 @@ export const ChessActions = createActionGroup({
 
         'Create Game Session': emptyProps(),
         'Create Game Session Failure': emptyProps(),
+
         'Set Game Session': props<{ game_session: string }>(),
         'Get Game Session': emptyProps(),
+
+        'Join Game Session': props<{ game_session: string }>(),
+        'Join Game Session Success': emptyProps(),
+        'Join Game Session Failure': emptyProps(),
 
         'Start Game': emptyProps(),
         'Pause Game': emptyProps(),
