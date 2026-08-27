@@ -7,7 +7,8 @@ export interface ChessState {
   pieces: ChessPiece[];
   game_session: string | undefined;
   guest: Guest | undefined;
-  loadingStates: LoadingStates
+  loadingStates: LoadingStates;
+  gameIsStarted: boolean;
 }
 
 export const initialState: ChessState = {
@@ -19,7 +20,8 @@ export const initialState: ChessState = {
     loadGuestLoading: false,
     disconnectGuestLoading: false,
     getInfosLoading: true,
-  }
+  },
+  gameIsStarted: false
 };
 
 
@@ -87,5 +89,13 @@ export const chessReducer = createReducer(
       ...state.loadingStates,
       createGuestLoading: false,
     }
+  })),
+  on(ChessActions.startGame, (state) => ({
+    ...state,
+    gameIsStarted: true
+  })),
+  on(ChessActions.pauseGame, (state) => ({
+    ...state,
+    gameIsStarted: false
   })),
 );

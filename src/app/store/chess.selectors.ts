@@ -37,3 +37,8 @@ export const selectLoadInfosLoading = createSelector(
   selectChessState,
   (state) => state?.loadingStates.getInfosLoading
 )
+
+export const selectGameIsStarted = createSelector(
+  selectChessState,
+  (state) => state?.gameIsStarted
+)

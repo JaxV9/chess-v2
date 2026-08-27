@@ -56,6 +56,33 @@
         color: #FDFDFD;
     }
 
+    .menu-icon-in-game {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+        width: 64px;
+        height: 64px;
+        border-radius: 8px;
+        background-color: #964900;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .menu-icon-in-game:hover {
+        transition: 0.2s;
+        scale: 1.1;
+        opacity: 0.8;
+    }
+
+    .menu-icon-in-game span {
+        font-size: 32px;
+        color: white;
+    }
+
+
     @media (max-width: 500px) {
         .menu {
             width: 80%;

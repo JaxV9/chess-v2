@@ -1,3 +1,4 @@
+@if(!chessFacade.gameIsStarted()){
 <div class="container">
     <div class="menu">
         <h2>Menu</h2>
@@ -13,11 +14,20 @@
                 @if(isGuestOrLogged()) {
                     @if (!haveGameSession()) {
                         <button (click)="chessFacade.createGameSession()">Play online with another player</button>
+                        <button>Play locally with an AI</button>
+                    } @else {
+                        <button (click)="chessFacade.resumeGame()">Resume game</button>
                     }
-                    <button>Play locally with an AI</button>
                     <button (click)="chessFacade.disconnectGuest()">Disconnect</button>
                 }
             }
         </div>
     </div>
 </div>
+} @else {
+<div (click)="chessFacade.pauseGame()" class="menu-icon-in-game">
+    <span class="material-icons">
+        settings
+    </span>
+</div>
+}

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { ChessPiece } from "../models/models"
 import { ChessWebsocketService } from "../services/websocket.service";
 import { ChessActions } from './chess.actions';
-import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGetGameSession, selectGuest, selectLoadGuestLoading, selectLoadInfosLoading } from './chess.selectors';
+import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectLoadGuestLoading, selectLoadInfosLoading } from './chess.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -20,6 +20,15 @@ export class ChessFacade {
     disconnectGuestLoading = toSignal(this.store.select(selectDisconnectGuestLoading));
     loadGuestLoading = toSignal(this.store.select(selectLoadGuestLoading));
     loadInfosLoading = toSignal(this.store.select(selectLoadInfosLoading));
+    gameIsStarted = toSignal(this.store.select(selectGameIsStarted));
+
+    pauseGame() {
+        this.store.dispatch(ChessActions.pauseGame());
+    }
+
+    resumeGame() {
+        this.store.dispatch(ChessActions.startGame());
+    }
 
     createGuest() {
         this.store.dispatch(ChessActions.createGuest());

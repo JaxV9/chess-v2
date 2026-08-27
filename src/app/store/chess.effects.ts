@@ -34,7 +34,10 @@ export class ChessEffects {
             ofType(ChessActions.createGameSession),
             switchMap(() => {
                 return this.httpService.createGameSession().pipe(
-                    map(response => ChessActions.setGameSession({ game_session: response.game_session })),
+                    switchMap((response) => [
+                        ChessActions.setGameSession({ game_session: response.game_session }),
+                        ChessActions.startGame()
+                    ]),
                     catchError((error) => {
                         console.error('Create game session error')
                         return of({ type: '[Chess] Create game session error' })
