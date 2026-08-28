@@ -3,13 +3,14 @@ import { ChessboardComponent } from './components/chessboard/chessboard.componen
 import { ChessFacade } from './store/chess.facade';
 import { MenuComponent } from './components/menu/menu.component';
 import { GameInfosComponent } from './components/game-infos/game-infos.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ShareComponent } from './components/share/share.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ChessboardComponent, MenuComponent, GameInfosComponent],
+  imports: [ChessboardComponent, MenuComponent, GameInfosComponent, ShareComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
 
   chessFacade = inject(ChessFacade);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   gameSession = toSignal(this.route.queryParamMap.pipe(
     map(params => params.get('gamesession'))
@@ -29,6 +31,12 @@ export class AppComponent implements OnInit {
       const guest = this.chessFacade.guest();
       if (guest && gameSession) {
         this.chessFacade.joinGameSession(gameSession);
+        //remove game session query param
+        this.router.navigate([], {
+          queryParams: {
+            gamesession: null
+          },
+        });
       }
     })
   }

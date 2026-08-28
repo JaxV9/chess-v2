@@ -63,6 +63,8 @@ export const chessReducer = createReducer(
   })),
   on(ChessActions.disconnectGuest, (state) => ({
     ...state,
+    game_session: undefined,
+    guest: undefined,
     loadingStates: {
       ...state.loadingStates,
       disconnectGuestLoading: true,
