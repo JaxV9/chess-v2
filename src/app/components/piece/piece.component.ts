@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { PieceService } from '../../services/piece.service';
+import { ChessPiece } from '../../models/models';
 
 @Component({
   selector: 'app-piece',
@@ -10,9 +11,8 @@ import { PieceService } from '../../services/piece.service';
   providers: [PieceService]
 })
 export class PieceComponent {
+  currentRole = input.required<ChessPiece>();
+
   pieceService = inject(PieceService);
 
-  currentRole() {
-
-  }
 }

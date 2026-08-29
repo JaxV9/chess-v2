@@ -9,6 +9,7 @@ export interface ChessState {
   guest: Guest | undefined;
   loadingStates: LoadingStates;
   gameIsStarted: boolean;
+  displaySharedBanner: boolean
 }
 
 export const initialState: ChessState = {
@@ -21,7 +22,8 @@ export const initialState: ChessState = {
     disconnectGuestLoading: false,
     getInfosLoading: true,
   },
-  gameIsStarted: false
+  gameIsStarted: false,
+  displaySharedBanner: false
 };
 
 

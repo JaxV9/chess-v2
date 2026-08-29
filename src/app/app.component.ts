@@ -21,13 +21,13 @@ export class AppComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
-  gameSession = toSignal(this.route.queryParamMap.pipe(
+  gameSessionParam = toSignal(this.route.queryParamMap.pipe(
     map(params => params.get('gamesession'))
   ));
 
   constructor() {
     effect(() => {
-      const gameSession = this.gameSession();
+      const gameSession = this.gameSessionParam();
       const guest = this.chessFacade.guest();
       if (guest && gameSession) {
         this.chessFacade.joinGameSession(gameSession);

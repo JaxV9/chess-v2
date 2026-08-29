@@ -30,6 +30,10 @@ export class ChessFacade {
         this.store.dispatch(ChessActions.startGame());
     }
 
+    wsConnection(gameSessionId: string) {
+        this.store.dispatch(ChessActions.syncWsChessPieces({ gameSessionId }))
+    }
+
     createGuest() {
         this.store.dispatch(ChessActions.createGuest());
     }

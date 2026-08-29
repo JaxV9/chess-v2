@@ -27,6 +27,8 @@
         margin: auto;
         display: flex;
         transition: all ease 0.2s;
+        justify-content: center;
+        align-items: center;
     }
 
     .square:hover .piece {
@@ -59,5 +61,15 @@
 
     .preview-conflict {
         background-color: red;
+    }
+
+    app-piece {
+        transition: all ease 0.2s;
+    }
+
+    app-piece:hover {
+        transition: all ease 0.2s;
+        opacity: 0.8;
+        scale: 1.05;
     }
 }

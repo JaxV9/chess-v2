@@ -19,10 +19,13 @@ export class ChessEffects {
             switchMap((action: { gameSessionId: string }) => {
                 const wsUrl = `${this.websocketService.baseUrl}/ws/chess/${action.gameSessionId}`;
                 return this.websocketService.connect(wsUrl).pipe(
-                    map((response) => ChessActions.setChessPieces({ pieces: response.data as ChessPiece[] })),
+                    switchMap((response) => of(
+                        ChessActions.setChessPieces({ pieces: response.data as ChessPiece[] }),
+                        ChessActions.syncWsChessPiecesSuccess()
+                    )),
                     catchError((error) => {
                         console.error('WebSocket connection error:', error);
-                        return of(ChessActions.wsConnectionError());
+                        return of(ChessActions.syncWsChessPiecesError());
                     })
                 );
             })
