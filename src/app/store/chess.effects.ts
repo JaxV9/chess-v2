@@ -5,7 +5,7 @@ import { ChessWebsocketService } from "../services/websocket.service";
 import { HttpService } from "../services/http.service";
 import { map, switchMap, catchError, tap } from "rxjs/operators";
 import { of, EMPTY } from "rxjs";
-import { ChessPiece } from "../models/models";
+import { ChessPiece, WebSocketResponse } from "../models/models";
 
 @Injectable()
 export class ChessEffects {
@@ -19,8 +19,9 @@ export class ChessEffects {
             switchMap((action: { gameSessionId: string }) => {
                 const wsUrl = `${this.websocketService.baseUrl}/ws/chess/${action.gameSessionId}`;
                 return this.websocketService.connect(wsUrl).pipe(
-                    switchMap((response) => of(
-                        ChessActions.setChessPieces({ pieces: response.data as ChessPiece[] }),
+                    switchMap((response: WebSocketResponse) => of(
+                        ChessActions.setChessPieces({ pieces: response.data }),
+                        ChessActions.setWaitingPlayer({ waitingPlayer: response.waiting_player }),
                         ChessActions.syncWsChessPiecesSuccess()
                     )),
                     catchError((error) => {

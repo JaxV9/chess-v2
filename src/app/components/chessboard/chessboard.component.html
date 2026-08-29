@@ -1,8 +1,13 @@
-    <div class="chessboard-body">
-        <div class="chessboard-content">
-            @for (square of squares; track square) {
-                <app-square [currentIndex]="square" />
-            }
-        </div>
-        <ng-content select="[infos]" />
+<div class="chessboard-body">
+    <div class="chessboard-content">
+        @for (square of squares; track square) {
+        <app-square [currentIndex]="square" />
+        }
     </div>
+    <ng-content select="[infos]" />
+    @if (chessFacade.waitingPlayer()) {
+        <div class="waiting-container">
+            <span>Waiting for a second player..</span>
+        </div>
+    }
+</div>

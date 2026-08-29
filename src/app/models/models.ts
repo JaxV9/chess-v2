@@ -49,3 +49,8 @@ export interface LoadingStates {
     disconnectGuestLoading: boolean,
     getInfosLoading: boolean,
 }
+
+export interface WebSocketResponse {
+    data: ChessPiece[],
+    waiting_player: boolean
+}

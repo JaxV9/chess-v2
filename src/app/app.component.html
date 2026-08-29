@@ -1,5 +1,7 @@
 <div class="container">
-    <app-share />
+    @if (chessFacade.waitingPlayer()) {
+        <app-share />
+    }
     <app-chessboard />
 </div>
 <app-menu />

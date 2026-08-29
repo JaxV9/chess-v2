@@ -42,3 +42,8 @@ export const selectGameIsStarted = createSelector(
   selectChessState,
   (state) => state?.gameIsStarted
 )
+
+export const selectWaitingPlayer = createSelector(
+  selectChessState,
+  (state) => state?.waitingPlayer
+)
