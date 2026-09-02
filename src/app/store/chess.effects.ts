@@ -108,7 +108,10 @@ export class ChessEffects {
             ofType(ChessActions.loadInfos),
             switchMap(() => {
                 return this.httpService.getInfos().pipe(
-                    map((response) => ChessActions.setInfos({ game_session: response.game_session })),
+                    switchMap((response) => of(
+                        ChessActions.setInfos({ game_session: response.game_session }),
+                        ChessActions.syncWsChessPieces({ gameSessionId: response.game_session })
+                    )),
                     catchError(() => of(ChessActions.loadInfosError()))
                 )
             })
