@@ -52,5 +52,8 @@ export interface LoadingStates {
 
 export interface WebSocketResponse {
     data: ChessPiece[],
-    waiting_player: boolean
+    players: {
+        username: string
+    }[],
+    waiting_player: boolean,
 }

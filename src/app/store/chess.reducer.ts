@@ -11,6 +11,7 @@ export interface ChessState {
   gameIsStarted: boolean;
   displaySharedBanner: boolean;
   waitingPlayer: boolean;
+  players: { username: string }[] | undefined
 }
 
 export const initialState: ChessState = {
@@ -25,7 +26,8 @@ export const initialState: ChessState = {
   },
   gameIsStarted: false,
   displaySharedBanner: false,
-  waitingPlayer: false
+  waitingPlayer: false,
+  players: undefined
 };
 
 
@@ -34,6 +36,10 @@ export const chessReducer = createReducer(
   on(ChessActions.setChessPieces, (state, { pieces }) => ({
     ...state,
     pieces
+  })),
+  on(ChessActions.setPlayersInGame, (state, { players }) => ({
+    ...state,
+    players
   })),
   on(ChessActions.setWaitingPlayer, (state, { waitingPlayer }) => ({
     ...state,

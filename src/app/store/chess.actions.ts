@@ -12,6 +12,8 @@ export const ChessActions = createActionGroup({
 
         'Set Waiting Player': props<{ waitingPlayer: boolean }>(),
 
+        'Set Players In Game': props<{ players: { username: string }[] }>(),
+
         'Create Guest': emptyProps(),
         'Create Guest Success': emptyProps(),
         'Create Guest Failure': emptyProps(),

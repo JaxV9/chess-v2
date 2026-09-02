@@ -21,6 +21,7 @@ export class ChessEffects {
                 return this.websocketService.connect(wsUrl).pipe(
                     switchMap((response: WebSocketResponse) => of(
                         ChessActions.setChessPieces({ pieces: response.data }),
+                        ChessActions.setPlayersInGame({ players: response.players }),
                         ChessActions.setWaitingPlayer({ waitingPlayer: response.waiting_player }),
                         ChessActions.syncWsChessPiecesSuccess()
                     )),

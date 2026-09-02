@@ -1,8 +1,18 @@
 :host {
-    .container {
+    .current-player-container {
         position: absolute;
         z-index: 10;
         bottom: 16px;
+        left: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .opponent-container {
+        position: absolute;
+        z-index: 10;
+        top: 16px;
         left: 16px;
         display: flex;
         flex-direction: column;
