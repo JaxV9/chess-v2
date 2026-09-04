@@ -37,6 +37,7 @@ export class Bishop {
 
         return diagonals
     }
+
     // 0 to 7
     row(pos: number) {
         return Math.floor((pos - 1) / 8);
@@ -59,7 +60,6 @@ export class Bishop {
                 const colDiff = this.col(piece.pos) - this.col(currentPiece.pos);
 
                 previews = previews.filter((preview) => {
-
                     //position of the collision with an other piece
                     const rD = this.row(preview) - this.row(currentPiece.pos);
                     const cD = this.col(preview) - this.col(currentPiece.pos);
