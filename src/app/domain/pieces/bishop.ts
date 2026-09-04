@@ -1,6 +1,10 @@
+import { Injectable } from "@angular/core";
 import { ChessPiece } from "../../models/models";
 
-export class BishopDomain {
+@Injectable({
+    providedIn: 'root'
+})
+export class Bishop {
     constructor() { }
 
     private moves(index: number) {

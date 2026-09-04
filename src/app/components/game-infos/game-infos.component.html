@@ -1,7 +1,8 @@
-<div class="opponent-container">
-    <span>Your opponent : {{chessFacade.opponent()}}</span>
-</div>
-
+@if (chessFacade.opponent()) {
+    <div class="opponent-container">
+        <span>Your opponent : {{chessFacade.opponent()}}</span>
+    </div>
+}
 <div class="current-player-container">
     @if (chessFacade.gameSession()) {
     <span>Game session : {{chessFacade.gameSession()}}</span>

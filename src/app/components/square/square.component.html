@@ -1,7 +1,8 @@
-<div [class]="currentColor() && currentColor()">
-    <div class="chess-piece-container">
-        @if(currentChessPiece()){
-            <app-piece [currentRole]="currentChessPiece()!" />
-        }
-    </div>
+<div [class]="squareService.colorManager(currentIndex())">
+    <div [class]="squareService.previewOverlay(currentIndex())"></div>
+    @if(squareService.currentChessPiece()){
+        <div class="chess-piece-container">
+            <app-piece (click)="squareService.watchPreview()" [currentRole]="squareService.currentChessPiece()!" />
+        </div>
+    }
 </div>

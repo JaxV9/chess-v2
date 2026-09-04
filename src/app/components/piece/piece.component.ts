@@ -8,7 +8,6 @@ import { ChessPiece } from '../../models/models';
   imports: [],
   templateUrl: './piece.component.html',
   styleUrl: './piece.component.css',
-  providers: [PieceService]
 })
 export class PieceComponent {
   currentRole = input.required<ChessPiece>();

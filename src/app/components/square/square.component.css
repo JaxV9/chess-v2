@@ -31,13 +31,6 @@
         align-items: center;
     }
 
-    .square:hover .piece {
-        scale: 1.02;
-        transition: all ease 0.2s;
-        opacity: 0.8;
-        cursor: pointer;
-    }
-
     .square-preview {
         height: 85%;
         width: 85%;

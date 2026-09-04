@@ -1,6 +1,10 @@
+import { Injectable } from "@angular/core";
 import { ChessPiece } from "../../models/models";
 
-export class QueenDomain {
+@Injectable({
+    providedIn: 'root'
+})
+export class Queen {
     constructor() { }
 
     private moves(index: number) {

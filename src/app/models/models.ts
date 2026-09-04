@@ -1,6 +1,7 @@
 export type ChessPiece = {
     id: string;
-    role: string,
+    role: 'pawn_black' | 'pawn_white' | 'bishop_black' | 'bishop_white' | 'king_black' |
+    'king_white' | 'queen_black' | 'queen_white' | 'knight_black' | 'knight_white' | 'rook_black' | 'rook_white',
     color: string,
     pos: number;
 };

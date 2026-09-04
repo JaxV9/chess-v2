@@ -1,6 +1,10 @@
+import { Injectable } from "@angular/core";
 import { ChessPiece } from "../../models/models";
 
-export class KnightDomain {
+@Injectable({
+    providedIn: 'root'
+})
+export class Knight {
     constructor() { }
 
     private moves(index: number, chessPiece: ChessPiece) {
@@ -46,7 +50,7 @@ export class KnightDomain {
         }
     }
 
-    public preview(index: number, chessPiece: ChessPiece) {
+    public preview(index: number, chessPiece: ChessPiece): number[] {
         return this.moves(index, chessPiece)
     }
 }

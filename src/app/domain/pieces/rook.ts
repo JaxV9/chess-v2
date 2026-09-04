@@ -1,9 +1,13 @@
+import { Injectable } from "@angular/core";
 import { ChessPiece } from "../../models/models";
 
-export class RookDomain {
+@Injectable({
+    providedIn: 'root'
+})
+export class Rook {
     constructor() { }
 
-    private moves(index: number) {
+    private moves(index: number): number[] {
         const lines: number[] = [];
         for (let i = index + 8; i <= 64 && i >= 0; i += 8) {
             lines.push(i);
@@ -36,7 +40,7 @@ export class RookDomain {
         }
     }
 
-    public preview(index: number) {
+    public preview(index: number): number[] {
         return this.moves(index)
     }
 }

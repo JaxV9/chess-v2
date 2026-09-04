@@ -1,7 +1,11 @@
 import { ChessPiece } from "../../models/models";
 import { PieceRole } from "../../constants/constants";
+import { Injectable } from "@angular/core";
 
-export class PawnDomain {
+@Injectable({
+    providedIn: 'root'
+})
+export class Pawn {
     constructor() { }
 
 
@@ -15,7 +19,7 @@ export class PawnDomain {
         }
     }
 
-    public preview(index: number, chessPiece: ChessPiece) {
+    public preview(index: number, chessPiece: ChessPiece): number[] | null {
         if (chessPiece.color === "black") {
             return [index + 8];
         } else if (chessPiece.color === "white") {

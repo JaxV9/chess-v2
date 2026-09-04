@@ -4,7 +4,6 @@
         <app-square [currentIndex]="square" />
         }
     </div>
-    <ng-content select="[infos]" />
     @if (chessFacade.waitingPlayer()) {
         <div class="waiting-container">
             <span>Waiting for a second player..</span>
