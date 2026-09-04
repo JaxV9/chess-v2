@@ -50,7 +50,7 @@ export class PieceService {
         switch (role) {
             case 'king_black':
             case 'king_white':
-                return this.king.preview(pos);
+                return this.king.preview(currentPiece);
             case 'queen_black':
             case 'queen_white':
                 return this.queen.preview(pos);
