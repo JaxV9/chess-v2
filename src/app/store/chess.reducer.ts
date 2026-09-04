@@ -11,7 +11,7 @@ export interface ChessState {
   gameIsStarted: boolean;
   displaySharedBanner: boolean;
   waitingPlayer: boolean;
-  players: { username: string }[] | undefined
+  players: { username: string, color: "white" | "black" }[] | undefined
 }
 
 export const initialState: ChessState = {

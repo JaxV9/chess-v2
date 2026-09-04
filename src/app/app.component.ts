@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, computed, effect, inject, OnInit } from '@angular/core';
 import { ChessboardComponent } from './components/chessboard/chessboard.component';
 import { ChessFacade } from './store/chess.facade';
 import { MenuComponent } from './components/menu/menu.component';
@@ -25,6 +25,10 @@ export class AppComponent implements OnInit {
     map(params => params.get('gamesession'))
   ));
 
+  isGuestOrLogged = computed(() => {
+    return this.chessFacade.guest();
+  })
+
   constructor() {
     effect(() => {
       const gameSession = this.gameSessionParam();
@@ -40,11 +44,11 @@ export class AppComponent implements OnInit {
       }
     });
 
-    // effect(() => {
-    //   if (!this.chessFacade.gameIsStarted() && this.chessFacade.gameSession()) {
-    //     this.chessFacade.resumeGame();
-    //   }
-    // })
+    effect(() => {
+      if (this.isGuestOrLogged()) {
+        this.chessFacade.resumeGame();
+      }
+    })
   }
 
   ngOnInit(): void {

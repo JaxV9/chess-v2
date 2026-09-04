@@ -26,7 +26,14 @@ export class ChessFacade {
         const currentPlayer = this.guest()?.username;
         const players = this.players();
         if (!players) return
-        return players.find((player) => player.username !== currentPlayer)?.username
+        return players.find((player) => player.username !== currentPlayer)
+    })
+
+    currentPlayer = computed(() => {
+        return {
+            "username": this.guest()?.username,
+            "color": this.opponent()?.color === "white" ? "black" : "white"
+        };
     })
 
     pauseGame() {

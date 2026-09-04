@@ -55,6 +55,7 @@ export interface WebSocketResponse {
     data: ChessPiece[],
     players: {
         username: string
+        color: "white" | "black"
     }[],
     waiting_player: boolean,
 }
