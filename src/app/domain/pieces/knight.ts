@@ -1,53 +1,50 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { ChessPiece } from "../../models/models";
+import { ChessFacade } from "../../store/chess.facade";
 
 @Injectable({
     providedIn: 'root'
 })
 export class Knight {
-    constructor() { }
+    chessFacade = inject(ChessFacade);
 
     private moves(index: number, chessPiece: ChessPiece) {
-        const previews = []
-        if (chessPiece.color === "black" || chessPiece.color === "white") {
+        const chessPieces = this.chessFacade.chessPieces();
+        let previews: number[] = []
 
-            if (index % 8 !== 1 && index % 8 !== 2) {
-                previews.push(
-                    index - 2 - 8,
-                    index - 2 + 8,
-                )
-            }
-            if (index % 8 !== 1) {
-                previews.push(
-                    index + 16 - 1,
-                    index - 16 - 1,
-                )
-            }
-            if (index % 8 !== 0 && index % 8 !== 7) {
-                previews.push(
-                    index + 2 - 8,
-                    index + 2 + 8
-                )
-            }
-
-            if (index % 8 !== 0) {
-                previews.push(
-                    index + 16 + 1,
-                    index - 16 + 1
-                )
-            }
+        if (index % 8 !== 1 && index % 8 !== 2) {
+            previews.push(
+                index - 2 - 8,
+                index - 2 + 8,
+            )
         }
+        if (index % 8 !== 1) {
+            previews.push(
+                index + 16 - 1,
+                index - 16 - 1,
+            )
+        }
+        if (index % 8 !== 0 && index % 8 !== 7) {
+            previews.push(
+                index + 2 - 8,
+                index + 2 + 8
+            )
+        }
+
+        if (index % 8 !== 0) {
+            previews.push(
+                index + 16 + 1,
+                index - 16 + 1
+            )
+        }
+
+        chessPieces?.map((friendPiece) => {
+            if (friendPiece.color === chessPiece.color && previews.includes(friendPiece.pos)) {
+                previews = previews.filter((preview) => preview !== friendPiece.pos);
+            }
+        });
+
         return previews;
-    }
-
-    public checkMove(nextPos: number, chessPiece: ChessPiece) {
-        const results = this.moves(chessPiece.pos, chessPiece)
-
-        if (results.includes(nextPos)) {
-            return true
-        } else {
-            return false
-        }
     }
 
     public preview(index: number, chessPiece: ChessPiece): number[] {
