@@ -1,7 +1,6 @@
 import { Injectable, computed, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChessPiece } from "../models/models"
-import { ChessWebsocketService } from "../services/websocket.service";
 import { ChessActions } from './chess.actions';
 import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectLoadGuestLoading, selectLoadInfosLoading, selectPlayers, selectWaitingPlayer } from './chess.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -11,7 +10,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class ChessFacade {
     private store = inject(Store);
-    private websocketService = inject(ChessWebsocketService);
 
     chessPieces = toSignal(this.store.select(selectChessPieces));
     players = toSignal(this.store.select(selectPlayers));

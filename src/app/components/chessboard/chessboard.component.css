@@ -3,14 +3,14 @@
     .chessboard-body {
         margin: auto;
         background-color: #84240c;
-        width: min(70vw, 70vh);
-        height: min(70vw, 70vh);
+        width: 50%;
         aspect-ratio: 1;
         border-radius: 8px;
         display: flex;
         position: relative;
         transition: all ease 0.2s;
         position: relative;
+        aspect-ratio: 1 / 1;
     }
 
     .chessboard-content {

@@ -38,6 +38,12 @@ export class AppComponent implements OnInit {
           },
         });
       }
+    });
+
+    effect(() => {
+      if (!this.chessFacade.gameIsStarted() && this.chessFacade.gameSession()) {
+        this.chessFacade.resumeGame();
+      }
     })
   }
 

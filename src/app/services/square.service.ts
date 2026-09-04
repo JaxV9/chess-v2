@@ -70,9 +70,7 @@ export class SquareService {
       if (!index || !pieceIsPreviewed) return;
 
       let chessPieces = this.chessFacade.chessPieces()?.map((piece) => {
-        if (piece.role === pieceIsPreviewed.role) {
-          console.log('index :', index);
-          console.log('pos :', piece.pos);
+        if (piece.id === pieceIsPreviewed.id) {
           return { ...piece, pos: index };
         }
         return piece

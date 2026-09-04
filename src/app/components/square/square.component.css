@@ -9,6 +9,7 @@
         align-items: center;
         transition: all ease 0.2s;
         position: relative;
+        aspect-ratio: 1 / 1;
     }
 
     .dark {
