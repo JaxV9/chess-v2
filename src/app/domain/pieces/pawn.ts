@@ -1,32 +1,32 @@
 import { ChessPiece } from "../../models/models";
 import { PieceRole } from "../../constants/constants";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
+import { ChessFacade } from "../../store/chess.facade";
 
 @Injectable({
     providedIn: 'root'
 })
 export class Pawn {
-    constructor() { }
 
+    chessFacade = inject(ChessFacade);
 
-    public checkMove(nextPos: number, chessPiece: ChessPiece) {
-        if (nextPos === chessPiece.pos + 8 && chessPiece.role === PieceRole.pawn_black) {
-            return true
-        } else if (nextPos === chessPiece.pos - 8 && chessPiece.role === PieceRole.pawn_white) {
-            return true
-        } else {
-            return false
-        }
-    }
+    public preview(index: number, chessPiece: ChessPiece): number[] {
+        const chessPieces = this.chessFacade.chessPieces();
+        let previews: number[] = []
 
-    public preview(index: number, chessPiece: ChessPiece): number[] | null {
         if (chessPiece.color === "black") {
-            return [index + 8];
+            previews.push(index + 8);
         } else if (chessPiece.color === "white") {
-            return [index - 8];
-        } else {
-            return null
+            previews.push(index - 8);
         }
 
+        const hasFriendPieceInPreview = chessPieces?.find((friendPiece) => {
+            return friendPiece.color === chessPiece.color && previews.includes(friendPiece.pos)
+        });
+        if (hasFriendPieceInPreview) return []
+        console.log(hasFriendPieceInPreview)
+
+
+        return previews;
     }
 }
