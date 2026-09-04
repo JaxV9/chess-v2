@@ -1,4 +1,5 @@
 import { Injectable, signal } from "@angular/core";
+import { ChessPiece } from "../models/models";
 
 
 @Injectable({
@@ -6,4 +7,5 @@ import { Injectable, signal } from "@angular/core";
 })
 export class ChessBoardService {
     squaresInPreview = signal<number[]>([]);
+    pieceIsPreviewed = signal<ChessPiece | undefined>(undefined);
 }

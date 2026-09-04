@@ -67,11 +67,7 @@ export class ChessFacade {
         this.store.dispatch(ChessActions.joinGameSession({ game_session }));
     }
 
-    updateChessPosition(chess: ChessPiece) {
-        const formatData: { action: string, pieces: ChessPiece[] } = {
-            action: "move",
-            pieces: [chess]
-        }
-        this.websocketService.sendMessage(formatData);
+    makeAMove(chessPieces: ChessPiece[]) {
+        this.store.dispatch(ChessActions.makeAMove({ chessPieces }))
     }
 }

@@ -18,6 +18,12 @@ export class SquareService {
     return this.chessFacade.chessPieces()?.find((chess) => chess.pos === currentIndex)
   })
 
+  currentSquareIsInPreview = computed(() => {
+    const index = this.index();
+    if (!index) return;
+    return this.chessBoardService.squaresInPreview().includes(index);
+  })
+
   public colorManager(index: number) {
     let theme: string = '';
     const currentLine: number = Number.isInteger(index / 8) ? index / 8 - 1 : Math.floor(index / 8);
@@ -39,15 +45,6 @@ export class SquareService {
     return 'square ' + theme;
   }
 
-  previewOverlay(index: number): string {
-    const squaresInPreview = this.chessBoardService.squaresInPreview();
-    const isInPreview = squaresInPreview.includes(index);
-    if (isInPreview) {
-      return this.previewManager(false);
-    }
-    return '';
-  }
-
   watchPreview() {
     const currentChessPiece = this.currentChessPiece();
     if (!currentChessPiece) return;
@@ -63,12 +60,36 @@ export class SquareService {
     if (newPreview !== oldPreview) {
       this.chessBoardService.squaresInPreview.set([...newPreview]);
     }
+    this.chessBoardService.pieceIsPreviewed.set(currentChessPiece);
   }
 
-  public previewManager(isConflictPreview: boolean): string {
-    if (isConflictPreview) {
-      return 'square-preview preview-conflict'
+  makeAMove() {
+    if (this.currentSquareIsInPreview()) {
+      const index = this.index();
+      const pieceIsPreviewed = this.chessBoardService.pieceIsPreviewed()
+      if (!index || !pieceIsPreviewed) return;
+
+      let chessPieces = this.chessFacade.chessPieces()?.map((piece) => {
+        if (piece.role === pieceIsPreviewed.role) {
+          console.log('index :', index);
+          console.log('pos :', piece.pos);
+          return { ...piece, pos: index };
+        }
+        return piece
+      });
+
+      if (!chessPieces) return
+      this.chessFacade.makeAMove(chessPieces)
+
+      this.chessBoardService.pieceIsPreviewed.set(undefined);
+      this.chessBoardService.squaresInPreview.set([]);
     }
+  }
+
+  public previewManager(): string {
+    // if (isConflictPreview) {
+    //   return 'square-preview preview-conflict'
+    // }
     return 'square-preview preview'
   }
 }

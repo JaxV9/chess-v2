@@ -34,6 +34,19 @@ export class ChessEffects {
         );
     });
 
+    makeAMove = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ChessActions.makeAMove),
+            tap((action) => {
+                const formatData: { action: string, pieces: ChessPiece[] } = {
+                    action: "move",
+                    pieces: [...action.chessPieces]
+                };
+                this.websocketService.sendMessage(formatData);
+            })
+        );
+    }, { dispatch: false });
+
     createGameSession = createEffect(() => {
         return this.actions$.pipe(
             ofType(ChessActions.createGameSession),

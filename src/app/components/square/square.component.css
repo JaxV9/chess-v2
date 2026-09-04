@@ -29,6 +29,8 @@
         transition: all ease 0.2s;
         justify-content: center;
         align-items: center;
+        position: relative;
+        z-index: 1;
     }
 
     .square-preview {
@@ -40,6 +42,7 @@
         align-items: center;
         transition: all ease 0.2s;
         position: absolute;
+        z-index: 0;
     }
 
     .preview {

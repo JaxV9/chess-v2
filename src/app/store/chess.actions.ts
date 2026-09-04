@@ -10,6 +10,10 @@ export const ChessActions = createActionGroup({
         'Sync Ws Chess Pieces Success': emptyProps(),
         'Sync Ws Chess Pieces Error': emptyProps(),
 
+        'Make A Move': props<{ chessPieces: ChessPiece[] }>(),
+        'Make A Move Success': props<{ chessPieces: ChessPiece[] }>(),
+        'Make A Move Failure': props<{ chessPieces: ChessPiece[] }>(),
+
         'Set Waiting Player': props<{ waitingPlayer: boolean }>(),
 
         'Set Players In Game': props<{ players: { username: string }[] }>(),
