@@ -46,26 +46,25 @@ export class PieceService {
 
     getPreview(currentPiece: ChessPiece): number[] | null {
         const role = currentPiece.role;
-        const pos = currentPiece.pos;
         switch (role) {
             case 'king_black':
             case 'king_white':
                 return this.king.preview(currentPiece);
             case 'queen_black':
             case 'queen_white':
-                return this.queen.preview(pos);
+                return this.queen.preview(currentPiece.pos);
             case 'bishop_black':
             case 'bishop_white':
                 return this.bishop.preview(currentPiece);
             case 'knight_black':
             case 'knight_white':
-                return this.knight.preview(pos, currentPiece);
+                return this.knight.preview(currentPiece);
             case 'rook_black':
             case 'rook_white':
-                return this.rook.preview(pos);
+                return this.rook.preview(currentPiece.pos);
             case 'pawn_black':
             case 'pawn_white':
-                return this.pawn.preview(pos, currentPiece);
+                return this.pawn.preview(currentPiece);
             default:
                 return null
         }

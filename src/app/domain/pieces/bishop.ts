@@ -57,7 +57,7 @@ export class Bishop {
 
                 const rowDiff = this.row(piece.pos) - this.row(currentPiece.pos);
                 const colDiff = this.col(piece.pos) - this.col(currentPiece.pos);
-                console.log(rowDiff, colDiff)
+
                 previews = previews.filter((preview) => {
 
                     //position of the collision with an other piece

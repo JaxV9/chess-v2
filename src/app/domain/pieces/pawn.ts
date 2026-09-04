@@ -10,13 +10,14 @@ export class Pawn {
 
     chessFacade = inject(ChessFacade);
 
-    public preview(index: number, chessPiece: ChessPiece): number[] {
+    public preview(chessPiece: ChessPiece): number[] {
         const chessPieces = this.chessFacade.chessPieces();
+        const index = chessPiece.pos;
         let previews: number[] = []
 
         if (chessPiece.color === "black") {
             previews.push(index + 8);
-        } else if (chessPiece.color === "white") {
+        } else {
             previews.push(index - 8);
         }
 
@@ -24,8 +25,6 @@ export class Pawn {
             return friendPiece.color === chessPiece.color && previews.includes(friendPiece.pos)
         });
         if (hasFriendPieceInPreview) return []
-        console.log(hasFriendPieceInPreview)
-
 
         return previews;
     }

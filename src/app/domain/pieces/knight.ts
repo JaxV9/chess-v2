@@ -8,8 +8,9 @@ import { ChessFacade } from "../../store/chess.facade";
 export class Knight {
     chessFacade = inject(ChessFacade);
 
-    private moves(index: number, chessPiece: ChessPiece) {
+    private moves(chessPiece: ChessPiece) {
         const chessPieces = this.chessFacade.chessPieces();
+        const index = chessPiece.pos
         let previews: number[] = []
 
         if (index % 8 !== 1 && index % 8 !== 2) {
@@ -47,7 +48,7 @@ export class Knight {
         return previews;
     }
 
-    public preview(index: number, chessPiece: ChessPiece): number[] {
-        return this.moves(index, chessPiece)
+    public preview(chessPiece: ChessPiece): number[] {
+        return this.moves(chessPiece)
     }
 }
