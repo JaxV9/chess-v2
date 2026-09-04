@@ -1,11 +1,12 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
+import { ChessFacade } from "../../store/chess.facade";
 import { ChessPiece } from "../../models/models";
 
 @Injectable({
     providedIn: 'root'
 })
 export class Rook {
-    constructor() { }
+    chessFacade = inject(ChessFacade);
 
     private moves(index: number): number[] {
         const lines: number[] = [];
@@ -29,18 +30,46 @@ export class Rook {
         return lines
     }
 
-    public checkMove(nextPos: number, chessPiece: ChessPiece) {
-
-        const results = this.moves(chessPiece.pos)
-
-        if (results.includes(nextPos)) {
-            return true
-        } else {
-            return false
-        }
+    // 0 to 7
+    row(pos: number) {
+        return Math.floor((pos - 1) / 8);
     }
 
-    public preview(index: number): number[] {
-        return this.moves(index)
+    // 0 to 7
+    col(pos: number) {
+        return (pos - 1) % 8;
+    }
+
+    public preview(currentPiece: ChessPiece): number[] {
+        const allPieces = this.chessFacade.chessPieces();
+        let previews = this.moves(currentPiece.pos);
+
+        allPieces?.map((piece) => {
+            if (previews.includes(piece.pos)) {
+                const rowDiff = this.row(piece.pos) - this.row(currentPiece.pos);
+                const colDiff = this.col(piece.pos) - this.col(currentPiece.pos);
+
+                previews = previews.filter((preview) => {
+                    //position of the collision with an other piece
+                    const rD = this.row(preview) - this.row(currentPiece.pos);
+                    const cD = this.col(preview) - this.col(currentPiece.pos);
+
+                    //get the distance in row or in col
+                    const isHorizontal = rowDiff === 0;
+                    const distance = isHorizontal ? Math.abs(colDiff) : Math.abs(rowDiff);
+                    const previewDistance = isHorizontal ? Math.abs(cD) : Math.abs(rD);
+
+                    const sameDirection = isHorizontal ? Math.sign(cD) === Math.sign(colDiff) && rD === 0
+                        : Math.sign(rD) === Math.sign(rowDiff) && cD === 0;
+
+                    const isBehind = piece.color === currentPiece.color ? previewDistance >= distance
+                        : previewDistance > distance;
+
+                    return !(sameDirection && isBehind);
+                })
+            }
+        })
+
+        return previews;
     }
 }

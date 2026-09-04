@@ -61,7 +61,7 @@ export class PieceService {
                 return this.knight.preview(currentPiece);
             case 'rook_black':
             case 'rook_white':
-                return this.rook.preview(currentPiece.pos);
+                return this.rook.preview(currentPiece);
             case 'pawn_black':
             case 'pawn_white':
                 return this.pawn.preview(currentPiece);
