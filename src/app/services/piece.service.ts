@@ -56,7 +56,7 @@ export class PieceService {
                 return this.queen.preview(pos);
             case 'bishop_black':
             case 'bishop_white':
-                return this.bishop.preview(pos);
+                return this.bishop.preview(currentPiece);
             case 'knight_black':
             case 'knight_white':
                 return this.knight.preview(pos, currentPiece);
