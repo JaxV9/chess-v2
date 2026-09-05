@@ -75,15 +75,20 @@ export const chessReducer = createReducer(
       getInfosLoading: false,
     }
   })),
-  on(ChessActions.disconnectGuest, (state) => ({
-    ...state,
+  on(ChessActions.disconnectGuest, () => ({
     pieces: [],
     game_session: undefined,
     guest: undefined,
     loadingStates: {
-      ...state.loadingStates,
-      disconnectGuestLoading: true,
-    }
+      createGuestLoading: false,
+      loadGuestLoading: false,
+      disconnectGuestLoading: false,
+      getInfosLoading: false,
+    },
+    gameIsStarted: false,
+    displaySharedBanner: false,
+    waitingPlayer: false,
+    players: undefined
   })),
   on(ChessActions.removeGuestFromStore, (state) => ({
     ...state,
