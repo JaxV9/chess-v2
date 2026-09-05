@@ -11,4 +11,8 @@
         display: block;
         margin: auto;
     }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
 }

@@ -1,4 +1,4 @@
-<div class="chessboard-body">
+<div [class]="chessFacade.currentPlayer().color === 'white' ? 'chessboard-body' : 'chessboard-body rotate' ">
     <div class="chessboard-content">
         @for (square of squares; track square) {
         <app-square [currentIndex]="square" />

@@ -18,6 +18,10 @@ export class SquareService {
     return this.chessFacade.chessPieces()?.find((chess) => chess.pos === currentIndex)
   })
 
+  isThisIsPiece = computed(() => {
+    return this.chessFacade.currentPlayer().color === this.chessBoardService.pieceIsPreviewed()?.color
+  })
+
   currentSquareIsInPreview = computed(() => {
     const index = this.index();
     if (!index) return;
@@ -46,6 +50,7 @@ export class SquareService {
   }
 
   watchPreview() {
+    if (this.chessFacade.currentPlayer()?.color !== this.currentChessPiece()?.color) return
     const currentChessPiece = this.currentChessPiece();
     if (!currentChessPiece) return;
 
@@ -64,6 +69,8 @@ export class SquareService {
   }
 
   makeAMove() {
+    if (this.chessFacade.currentPlayer()?.color !== this.chessBoardService.pieceIsPreviewed()?.color) return
+
     if (this.currentSquareIsInPreview()) {
       const index = this.index();
       const pieceIsPreviewed = this.chessBoardService.pieceIsPreviewed()

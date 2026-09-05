@@ -1,15 +1,15 @@
 @if (chessFacade.opponent()) {
     <div class="opponent-container">
         <span>Your opponent : {{chessFacade.opponent()?.username}}</span>
-        <span>Your opponent : {{chessFacade.opponent()?.color}}</span>
+        <span>Color : {{chessFacade.opponent()?.color}}</span>
     </div>
 }
 <div class="current-player-container">
     @if (chessFacade.gameSession()) {
-    <span>Game session : {{chessFacade.gameSession()}}</span>
+        <span>Game session : {{chessFacade.gameSession()}}</span>
     }
     @if (chessFacade.guest()) {
-    <span>Username : {{chessFacade.currentPlayer().username}}</span>
-    <span>Color : {{chessFacade.currentPlayer().color}}</span>
+        <span>Username : {{chessFacade.currentPlayer().username}}</span>
+        <span>Color : {{chessFacade.currentPlayer().color}}</span>
     }
 </div>

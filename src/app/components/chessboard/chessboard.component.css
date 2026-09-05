@@ -13,6 +13,10 @@
         aspect-ratio: 1 / 1;
     }
 
+    .rotate {
+        transform: rotate(180deg);
+    }
+
     .chessboard-content {
         margin: auto;
         width: 92%;

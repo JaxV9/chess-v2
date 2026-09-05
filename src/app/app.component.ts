@@ -43,12 +43,6 @@ export class AppComponent implements OnInit {
         });
       }
     });
-
-    effect(() => {
-      if (this.isGuestOrLogged()) {
-        this.chessFacade.resumeGame();
-      }
-    })
   }
 
   ngOnInit(): void {
