@@ -58,4 +58,5 @@ export interface WebSocketResponse {
         color: "white" | "black"
     }[],
     waiting_player: boolean,
+    user_to_play: string
 }

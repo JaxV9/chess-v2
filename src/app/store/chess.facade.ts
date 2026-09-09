@@ -2,7 +2,7 @@ import { Injectable, computed, effect, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChessPiece } from "../models/models"
 import { ChessActions } from './chess.actions';
-import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectLoadGuestLoading, selectLoadInfosLoading, selectPlayers, selectWaitingPlayer } from './chess.selectors';
+import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectLoadGuestLoading, selectLoadInfosLoading, selectPlayers, selectUserToPlay, selectWaitingPlayer } from './chess.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -21,6 +21,7 @@ export class ChessFacade {
     loadInfosLoading = toSignal(this.store.select(selectLoadInfosLoading));
     gameIsStarted = toSignal(this.store.select(selectGameIsStarted));
     waitingPlayer = toSignal(this.store.select(selectWaitingPlayer));
+    userToPlay = toSignal(this.store.select(selectUserToPlay));
 
     opponent = computed(() => {
         const currentPlayer = this.guest()?.username;
@@ -40,6 +41,10 @@ export class ChessFacade {
             "username": this.guest()?.username,
             "color": color
         };
+    })
+
+    currentUserHaveToPlay = computed(() => {
+        return this.currentPlayer()?.username === this.userToPlay();
     })
 
     pauseGame() {

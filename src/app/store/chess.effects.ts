@@ -23,7 +23,8 @@ export class ChessEffects {
                         ChessActions.setChessPieces({ pieces: response.data }),
                         ChessActions.setPlayersInGame({ players: response.players }),
                         ChessActions.setWaitingPlayer({ waitingPlayer: response.waiting_player }),
-                        ChessActions.syncWsChessPiecesSuccess()
+                        ChessActions.syncWsChessPiecesSuccess(),
+                        ChessActions.setUserToPlay({ userToPlay: response.user_to_play })
                     )),
                     catchError((error) => {
                         console.error('WebSocket connection error:', error);

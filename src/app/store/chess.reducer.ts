@@ -11,7 +11,8 @@ export interface ChessState {
   gameIsStarted: boolean;
   displaySharedBanner: boolean;
   waitingPlayer: boolean;
-  players: { username: string, color: "white" | "black" }[] | undefined
+  players: { username: string, color: "white" | "black" }[] | undefined;
+  userToPlay: string | undefined
 }
 
 export const initialState: ChessState = {
@@ -27,7 +28,8 @@ export const initialState: ChessState = {
   gameIsStarted: false,
   displaySharedBanner: false,
   waitingPlayer: false,
-  players: undefined
+  players: undefined,
+  userToPlay: undefined
 };
 
 
@@ -44,6 +46,10 @@ export const chessReducer = createReducer(
   on(ChessActions.setWaitingPlayer, (state, { waitingPlayer }) => ({
     ...state,
     waitingPlayer
+  })),
+  on(ChessActions.setUserToPlay, (state, { userToPlay }) => ({
+    ...state,
+    userToPlay
   })),
   on(ChessActions.setGameSession, (state, { game_session }) => ({
     ...state,
@@ -88,7 +94,8 @@ export const chessReducer = createReducer(
     gameIsStarted: false,
     displaySharedBanner: false,
     waitingPlayer: false,
-    players: undefined
+    players: undefined,
+    userToPlay: undefined
   })),
   on(ChessActions.removeGuestFromStore, (state) => ({
     ...state,

@@ -35,6 +35,7 @@ export class SquareService {
 
   public colorManager(index: number) {
     let theme: string = '';
+    let hover: string = '';
     const currentLine: number = Number.isInteger(index / 8) ? index / 8 - 1 : Math.floor(index / 8);
     const pairLine: boolean = currentLine % 2 == 0
 
@@ -51,11 +52,17 @@ export class SquareService {
       theme = "clear"
     }
 
-    return 'square ' + theme;
+    if (this.currentSquareIsInPreview()) {
+      hover = 'pointer'
+    }
+
+    return `square ${hover} ${theme}`;
   }
 
   watchPreview() {
     if (this.chessFacade.currentPlayer()?.color !== this.currentChessPiece()?.color) return
+    if (!this.chessFacade.currentUserHaveToPlay()) return
+
     const currentChessPiece = this.currentChessPiece();
     if (!currentChessPiece) return;
 
@@ -74,6 +81,7 @@ export class SquareService {
   }
 
   makeAMove() {
+    if (!this.chessFacade.currentUserHaveToPlay()) return
     const index = this.index();
     const pieceIsPreviewed = this.chessBoardService.pieceIsPreviewed();
     if (!index || !pieceIsPreviewed) return;
@@ -94,6 +102,7 @@ export class SquareService {
 
       if (!chessPieces) return;
       this.chessFacade.makeAMove(chessPieces)
+      this.chessBoardService.resetPreview();
       return;
     }
 
@@ -107,6 +116,7 @@ export class SquareService {
 
       if (!chessPieces) return
       this.chessFacade.makeAMove(chessPieces)
+      this.chessBoardService.resetPreview();
 
       this.chessBoardService.pieceIsPreviewed.set(undefined);
       this.chessBoardService.squaresInPreview.set([]);

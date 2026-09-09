@@ -35,8 +35,8 @@
     }
 
     .square-preview {
-        height: 85%;
-        width: 85%;
+        height: 35%;
+        width: 35%;
         margin: auto;
         display: flex;
         justify-content: center;
@@ -44,6 +44,7 @@
         transition: all ease 0.2s;
         position: absolute;
         z-index: 0;
+        border-radius: 50%;
     }
 
     .preview {
@@ -52,12 +53,31 @@
     }
 
     .preview:hover {
-        width: 80%;
-        height: 80%;
+        width: 40%;
+        height: 40%;
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .pointer:hover .preview {
+        width: 40%;
+        height: 40%;
     }
 
     .preview-conflict {
-        background-color: red;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        background-color: rgba(231, 76, 60, 0.45);
+        z-index: 0;
+    }
+
+    .pointer .preview-conflict {
+        background-color: rgb(231, 77, 60);
+        width: 85%;
+        height: 85%;
     }
 
     app-piece {

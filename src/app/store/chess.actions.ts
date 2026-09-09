@@ -18,6 +18,8 @@ export const ChessActions = createActionGroup({
 
         'Set Players In Game': props<{ players: { username: string, color: "white" | "black" }[] }>(),
 
+        'Set User To Play': props<{ userToPlay: string }>(),
+
         'Create Guest': emptyProps(),
         'Create Guest Success': emptyProps(),
         'Create Guest Failure': emptyProps(),
