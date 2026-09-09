@@ -1,1 +1,1 @@
-<img [class]="chessFacade.currentPlayer().color === 'white' ? 'piece' : 'piece rotate'" [src]="currentRole() ? pieceService.getPieceImage(currentRole()) : ''" />
+<img [class]="getPieceClass()" [src]="currentRole() ? pieceService.getPieceImage(currentRole()) : ''" />
