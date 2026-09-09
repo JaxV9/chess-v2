@@ -75,12 +75,15 @@ export class SquareService {
 
   makeAMove() {
     const index = this.index();
-    if (this.hasEnnemyInSquare()) {
-      const pieceIsPreviewed = this.chessBoardService.pieceIsPreviewed();
-      if (!index || !pieceIsPreviewed) return;
+    const pieceIsPreviewed = this.chessBoardService.pieceIsPreviewed();
+    if (!index || !pieceIsPreviewed) return;
 
+    const couldCapture = this.chessBoardService.squaresInPreview().includes(index);
+
+    if (this.hasEnnemyInSquare() && couldCapture) {
       const opponentPiece = this.chessFacade.chessPieces()?.find(piece => piece.pos === index)
       if (!opponentPiece) return;
+
       let chessPieces = this.chessFacade.chessPieces()?.filter(piece => piece.id !== pieceIsPreviewed.id)
         .map((piece) => {
           if (piece.pos === index) {
@@ -88,16 +91,13 @@ export class SquareService {
           }
           return piece
         }).filter(piece => piece.id !== opponentPiece.id);
-      console.log(chessPieces)
+
       if (!chessPieces) return;
       this.chessFacade.makeAMove(chessPieces)
       return;
     }
 
     if (this.currentSquareIsInPreview()) {
-      const pieceIsPreviewed = this.chessBoardService.pieceIsPreviewed()
-      if (!index || !pieceIsPreviewed) return;
-
       let chessPieces = this.chessFacade.chessPieces()?.map((piece) => {
         if (piece.id === pieceIsPreviewed.id) {
           return { ...piece, pos: index };

@@ -29,10 +29,6 @@ export class ChessFacade {
         return players.find((player) => player.username !== currentPlayer)
     })
 
-    test = effect(() => {
-        console.log(this.players())
-    })
-
     currentPlayer = computed(() => {
         let color = undefined;
         const opponent = this.opponent();
