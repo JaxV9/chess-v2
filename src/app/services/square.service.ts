@@ -28,6 +28,11 @@ export class SquareService {
     return this.chessBoardService.squaresInPreview().includes(index);
   })
 
+  hasEnnemyInSquare = computed(() => {
+    if (!this.currentChessPiece()) return;
+    return this.chessBoardService.pieceIsPreviewed()?.color !== this.currentChessPiece()?.color;
+  })
+
   public colorManager(index: number) {
     let theme: string = '';
     const currentLine: number = Number.isInteger(index / 8) ? index / 8 - 1 : Math.floor(index / 8);
@@ -69,10 +74,27 @@ export class SquareService {
   }
 
   makeAMove() {
-    if (this.chessFacade.currentPlayer()?.color !== this.chessBoardService.pieceIsPreviewed()?.color) return
+    const index = this.index();
+    if (this.hasEnnemyInSquare()) {
+      const pieceIsPreviewed = this.chessBoardService.pieceIsPreviewed();
+      if (!index || !pieceIsPreviewed) return;
+
+      const opponentPiece = this.chessFacade.chessPieces()?.find(piece => piece.pos === index)
+      if (!opponentPiece) return;
+      let chessPieces = this.chessFacade.chessPieces()?.filter(piece => piece.id !== pieceIsPreviewed.id)
+        .map((piece) => {
+          if (piece.pos === index) {
+            return { ...pieceIsPreviewed, pos: piece.pos }
+          }
+          return piece
+        }).filter(piece => piece.id !== opponentPiece.id);
+      console.log(chessPieces)
+      if (!chessPieces) return;
+      this.chessFacade.makeAMove(chessPieces)
+      return;
+    }
 
     if (this.currentSquareIsInPreview()) {
-      const index = this.index();
       const pieceIsPreviewed = this.chessBoardService.pieceIsPreviewed()
       if (!index || !pieceIsPreviewed) return;
 
@@ -92,9 +114,9 @@ export class SquareService {
   }
 
   public previewManager(): string {
-    // if (isConflictPreview) {
-    //   return 'square-preview preview-conflict'
-    // }
+    if (this.hasEnnemyInSquare()) {
+      return 'square-preview preview-conflict'
+    }
     return 'square-preview preview'
   }
 }

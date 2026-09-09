@@ -1,4 +1,4 @@
-import { Injectable, computed, inject } from '@angular/core';
+import { Injectable, computed, effect, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChessPiece } from "../models/models"
 import { ChessActions } from './chess.actions';
@@ -25,14 +25,24 @@ export class ChessFacade {
     opponent = computed(() => {
         const currentPlayer = this.guest()?.username;
         const players = this.players();
-        if (!players) return
+        if (!players) return undefined;
         return players.find((player) => player.username !== currentPlayer)
     })
 
+    test = effect(() => {
+        console.log(this.players())
+    })
+
     currentPlayer = computed(() => {
+        let color = undefined;
+        const opponent = this.opponent();
+        if (opponent) {
+            color = opponent.color === "white" ? "black" : "white"
+        }
+
         return {
             "username": this.guest()?.username,
-            "color": this.opponent()?.color === "white" ? "black" : "white"
+            "color": color
         };
     })
 

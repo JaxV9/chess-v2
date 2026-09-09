@@ -35,7 +35,7 @@ export const chessReducer = createReducer(
   initialState,
   on(ChessActions.setChessPieces, (state, { pieces }) => ({
     ...state,
-    pieces
+    pieces: [...pieces]
   })),
   on(ChessActions.setPlayersInGame, (state, { players }) => ({
     ...state,
