@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 })
 export class HttpService {
   private http = inject(HttpClient);
-  private baseUrl = environment.httpBaseUrl;
+  private baseUrl = environment.httpBaseUrl.replace(/\/+$/, '');
 
   createGuest() {
     return this.http.post<{ id: string, username: string }>(`${this.baseUrl}/guest`, {},
