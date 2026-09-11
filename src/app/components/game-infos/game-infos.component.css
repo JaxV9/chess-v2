@@ -19,4 +19,13 @@
         gap: 8px;
     }
     
+    .development-status {
+        position: absolute;
+        z-index: 10;
+        top: 16px;
+        right: 16px;
+        background-color: rgb(237, 234, 234);
+        padding: 4px 8px;
+        border-radius: 8px;
+    }
 }
