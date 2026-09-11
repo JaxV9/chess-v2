@@ -5,7 +5,7 @@
         }
     </div>
     @if (chessFacade.waitingPlayer()) {
-        <div class="waiting-container">
+        <div [class]="getWaitingClass()">
             <span>Waiting for a second player..</span>
         </div>
     }

@@ -20,4 +20,13 @@ export class ChessboardComponent {
     }
     return `${style} chessboard-body`
   });
+
+  getWaitingClass = computed(() => {
+    let style = "";
+    const currentPlayer = this.chessFacade.currentPlayer();
+    if (currentPlayer.color === "black") {
+      style = "rotate"
+    }
+    return `${style} waiting-container`
+  });
 }
