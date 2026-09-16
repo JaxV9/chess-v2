@@ -1,10 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { ChessPiece, Guest, LoadingStates } from '../models/models';
+import { ChessPiece, Guest, LoadingStates, ChessHistory } from '../models/models';
 import { ChessActions } from './chess.actions';
 
 
 export interface ChessState {
   pieces: ChessPiece[];
+  history: ChessHistory[];
   game_session: string | undefined;
   guest: Guest | undefined;
   loadingStates: LoadingStates;
@@ -17,6 +18,7 @@ export interface ChessState {
 
 export const initialState: ChessState = {
   pieces: [],
+  history: [],
   game_session: undefined,
   guest: undefined,
   loadingStates: {
@@ -37,7 +39,11 @@ export const chessReducer = createReducer(
   initialState,
   on(ChessActions.setChessPieces, (state, { pieces }) => ({
     ...state,
-    pieces: [...pieces]
+    pieces: pieces ? [...pieces] : []
+  })),
+  on(ChessActions.setHistory, (state, { history }) => ({
+    ...state,
+    history: history ? [...history] : []
   })),
   on(ChessActions.setPlayersInGame, (state, { players }) => ({
     ...state,
@@ -83,6 +89,7 @@ export const chessReducer = createReducer(
   })),
   on(ChessActions.disconnectGuest, () => ({
     pieces: [],
+    history: [],
     game_session: undefined,
     guest: undefined,
     loadingStates: {

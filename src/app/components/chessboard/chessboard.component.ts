@@ -1,10 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { SquareComponent } from '../square/square.component';
 import { ChessFacade } from '../../store/chess.facade';
+import { ShareComponent } from '../share/share.component';
 
 @Component({
   selector: 'app-chessboard',
-  imports: [SquareComponent],
+  imports: [SquareComponent, ShareComponent],
   templateUrl: './chessboard.component.html',
   styleUrl: './chessboard.component.css'
 })

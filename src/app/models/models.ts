@@ -51,8 +51,15 @@ export interface LoadingStates {
     getInfosLoading: boolean,
 }
 
+export interface ChessHistory {
+    piece_id: string,
+    from: number,
+    to: number
+}
+
 export interface WebSocketResponse {
     data: ChessPiece[],
+    history: ChessHistory[],
     players: {
         username: string
         color: "white" | "black"

@@ -1,8 +1,8 @@
-import { Injectable, computed, effect, inject } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChessPiece } from "../models/models"
 import { ChessActions } from './chess.actions';
-import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectLoadGuestLoading, selectLoadInfosLoading, selectPlayers, selectUserToPlay, selectWaitingPlayer } from './chess.selectors';
+import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectHistory, selectLoadGuestLoading, selectLoadInfosLoading, selectPlayers, selectUserToPlay, selectWaitingPlayer } from './chess.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class ChessFacade {
     private store = inject(Store);
 
     chessPieces = toSignal(this.store.select(selectChessPieces));
+    history = toSignal(this.store.select(selectHistory));
     players = toSignal(this.store.select(selectPlayers));
     gameSession = toSignal(this.store.select(selectGetGameSession));
     guest = toSignal(this.store.select(selectGuest));

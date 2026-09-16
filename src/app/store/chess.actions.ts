@@ -1,10 +1,11 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { ChessPiece, Guest } from '../models/models';
+import { ChessPiece, Guest, ChessHistory } from '../models/models';
 
 export const ChessActions = createActionGroup({
     source: 'Chess',
     events: {
         'Set Chess Pieces': props<{ pieces: ChessPiece[] }>(),
+        'Set History': props<{ history: ChessHistory[] }>(),
 
         'Sync Ws Chess Pieces': props<{ gameSessionId: string }>(),
         'Sync Ws Chess Pieces Success': emptyProps(),

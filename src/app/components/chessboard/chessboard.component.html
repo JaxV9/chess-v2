@@ -1,12 +1,17 @@
-<div [class]="getChessBoardClass()">
-    <div class="chessboard-content">
-        @for (square of squares; track square) {
-        <app-square [currentIndex]="square" />
-        }
-    </div>
+<div class="chessboard-wrapper">
     @if (chessFacade.waitingPlayer()) {
+    <app-share />
+    }
+    <div [class]="getChessBoardClass()">
+        <div class="chessboard-content">
+            @for (square of squares; track square) {
+            <app-square [currentIndex]="square" />
+            }
+        </div>
+        @if (chessFacade.waitingPlayer()) {
         <div [class]="getWaitingClass()">
             <span>Waiting for a second player..</span>
         </div>
-    }
+        }
+    </div>
 </div>

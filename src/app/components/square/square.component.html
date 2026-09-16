@@ -1,6 +1,5 @@
 <div (click)="squareService.makeAMove()" [class]="squareService.colorManager(currentIndex())">
-    <div [class]="squareService.currentSquareIsInPreview() ? squareService.previewManager() : ''">
-        
+    <div [class]="squareService.previewManager()">
     </div>
     @if(squareService.currentChessPiece()){
         <div class="chess-piece-container">

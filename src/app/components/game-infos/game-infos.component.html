@@ -1,9 +1,14 @@
-@if (chessFacade.opponent()) {
-    <div class="opponent-container">
+<div class="opponent-container">
+
+    <div class="development-status">
+        <span>🛠️ The game is currently in development</span>
+    </div>
+    @if (chessFacade.opponent()) {
         <span>Your opponent : {{chessFacade.opponent()?.username}}</span>
         <!-- <span>Color : {{chessFacade.opponent()?.color}}</span> -->
-    </div>
-}
+    }
+</div>
+
 <div class="current-player-container">
     @if (chessFacade.gameSession()) {
         <span>Game session : {{chessFacade.gameSession()}}</span>
@@ -14,8 +19,4 @@
             <!-- <span>Color : {{chessFacade.currentPlayer().color}}</span> -->
         }
     }
-</div>
-
-<div class="development-status">
-    <span>🛠️ The game is currently in development</span>
 </div>

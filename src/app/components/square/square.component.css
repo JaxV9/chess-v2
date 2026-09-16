@@ -47,6 +47,19 @@
         border-radius: 50%;
     }
 
+    .square-history {
+        height: 85%;
+        width: 85%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all ease 0.2s;
+        position: absolute;
+        z-index: 0;
+        border-radius: 4px;
+    }
+
     .preview {
         background-color: #79b567;
         cursor: pointer;

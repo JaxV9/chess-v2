@@ -57,3 +57,8 @@ export const selectUserToPlay = createSelector(
   selectChessState,
   (state) => state?.userToPlay
 )
+
+export const selectHistory = createSelector(
+  selectChessState,
+  (state) => state?.history
+)

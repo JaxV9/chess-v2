@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { ChessFacade } from '../store/chess.facade';
 import { PieceService } from './piece.service';
 import { ChessBoardService } from './chessBoard.service';
@@ -11,6 +11,16 @@ export class SquareService {
   pieceService = inject(PieceService);
 
   index = signal<number | undefined>(undefined);
+
+  isLastMouvement = computed(() => {
+    const history = this.chessFacade.history();
+    const index = this.index();
+    if (!history || !index) return;
+    const lastMouve = history[history.length - 1]?.to;
+    const secondToLastMouve = history[history.length - 1]?.from;
+
+    return lastMouve === index || secondToLastMouve === index;
+  })
 
   currentChessPiece = computed(() => {
     const currentIndex = this.index();
@@ -124,9 +134,15 @@ export class SquareService {
   }
 
   public previewManager(): string {
-    if (this.hasEnnemyInSquare()) {
-      return 'square-preview preview-conflict'
+    if (!this.currentSquareIsInPreview()) {
+      if (this.isLastMouvement()) {
+        return 'square-history preview';
+      }
+      return '';
     }
-    return 'square-preview preview'
+    if (this.hasEnnemyInSquare()) {
+      return 'square-preview preview-conflict';
+    }
+    return 'square-preview preview';
   }
 }
