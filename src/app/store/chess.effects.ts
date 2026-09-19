@@ -78,6 +78,7 @@ export class ChessEffects {
             ofType(ChessActions.createGameSession),
             switchMap(() => {
                 return this.httpService.createGameSession().pipe(
+                    delay(300),
                     switchMap((response) => of(
                         ChessActions.setGameSession({ game_session: response.game_session }),
                         ChessActions.startGame(),
@@ -98,6 +99,7 @@ export class ChessEffects {
             ofType(ChessActions.joinGameSession),
             switchMap((action) =>
                 this.httpService.joinGameSession(action.game_session).pipe(
+                    delay(300),
                     switchMap((response) => of(
                         ChessActions.joinGameSessionSuccess(),
                         ChessActions.startGame(),
