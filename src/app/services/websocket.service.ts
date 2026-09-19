@@ -12,10 +12,17 @@ export class ChessWebsocketService {
 
     connect(url: string): Observable<WebSocketResponse> {
 
-        if (!this.socket$) {
-            this.socket$ = webSocket(url);
-        }
+        this.disconnect();
+        this.socket$ = webSocket(url);
+
         return this.socket$.asObservable();
+    }
+
+    disconnect(): void {
+        if (this.socket$) {
+            this.socket$.complete();
+            this.socket$ = null;
+        }
     }
 
     sendMessage(message: any) {
