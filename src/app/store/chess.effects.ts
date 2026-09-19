@@ -41,7 +41,6 @@ export class ChessEffects {
         return this.actions$.pipe(
             ofType(ChessActions.hasLeftGame),
             switchMap((action: { response: "ok" | "opponent_quit" }) => {
-                console.log(action)
                 if (action.response === "opponent_quit") {
                     return of(ChessActions.setHasLeftGame())
                 }
