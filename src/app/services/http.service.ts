@@ -21,6 +21,12 @@ export class HttpService {
     });
   }
 
+  quitGame() {
+    return this.http.post(`${this.baseUrl}/quitgame`, {},
+      { withCredentials: true }
+    );
+  }
+
   disconnectGuest() {
     return this.http.post(`${this.baseUrl}/guest/disconnect`, {},
       { withCredentials: true }

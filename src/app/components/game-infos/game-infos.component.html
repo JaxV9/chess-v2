@@ -1,5 +1,8 @@
-<div class="opponent-container">
+<div class="has-left-game" [class.show]="chessFacade.hasLeftGame()">
+    <p>A player has left the game</p>
+</div>
 
+<div class="opponent-container">
     <div class="development-status">
         <span>🛠️ The game is currently in development</span>
     </div>

@@ -58,6 +58,7 @@ export interface ChessHistory {
 }
 
 export interface WebSocketResponse {
+    response: 'ok' | 'opponent_quit',
     data: ChessPiece[],
     history: ChessHistory[],
     players: {

@@ -3,7 +3,7 @@ import { ChessActions } from "./chess.actions";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ChessWebsocketService } from "../services/websocket.service";
 import { HttpService } from "../services/http.service";
-import { map, switchMap, catchError, tap } from "rxjs/operators";
+import { map, switchMap, catchError, tap, delay } from "rxjs/operators";
 import { of, EMPTY } from "rxjs";
 import { ChessPiece, WebSocketResponse } from "../models/models";
 
@@ -25,7 +25,8 @@ export class ChessEffects {
                         ChessActions.setPlayersInGame({ players: response.players }),
                         ChessActions.setWaitingPlayer({ waitingPlayer: response.waiting_player }),
                         ChessActions.syncWsChessPiecesSuccess(),
-                        ChessActions.setUserToPlay({ userToPlay: response.user_to_play })
+                        ChessActions.setUserToPlay({ userToPlay: response.user_to_play }),
+                        ChessActions.hasLeftGame({ response: response.response })
                     )),
                     catchError((error) => {
                         console.error('WebSocket connection error:', error);
@@ -33,6 +34,30 @@ export class ChessEffects {
                     })
                 );
             })
+        );
+    });
+
+    hasLeftGame$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ChessActions.hasLeftGame),
+            switchMap((action: { response: "ok" | "opponent_quit" }) => {
+                console.log(action)
+                if (action.response === "opponent_quit") {
+                    return of(ChessActions.setHasLeftGame())
+                }
+                return EMPTY
+            })
+        )
+    })
+
+    setHasLeftGame$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ChessActions.setHasLeftGame),
+            delay(2000),
+            switchMap(() => of(
+                ChessActions.setHasLeftGameReset(),
+                ChessActions.quitGame(),
+            ))
         );
     });
 
@@ -129,6 +154,20 @@ export class ChessEffects {
                         ChessActions.syncWsChessPieces({ gameSessionId: response.game_session })
                     )),
                     catchError(() => of(ChessActions.loadInfosError()))
+                )
+            })
+        )
+    })
+
+    quitGame = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ChessActions.quitGame),
+            switchMap(() => {
+                return this.httpService.quitGame().pipe(
+                    map(() => ChessActions.quitGameSucess()),
+                    catchError((error) => {
+                        return of(ChessActions.quitGameFailure());
+                    })
                 )
             })
         )

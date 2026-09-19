@@ -17,6 +17,10 @@ export const ChessActions = createActionGroup({
 
         'Set Waiting Player': props<{ waitingPlayer: boolean }>(),
 
+        'Has Left Game': props<{ response: "ok" | "opponent_quit" }>(),
+        'Set Has Left Game': emptyProps(),
+        'Set Has Left Game Reset': emptyProps(),
+
         'Set Players In Game': props<{ players: { username: string, color: "white" | "black" }[] }>(),
 
         'Set User To Play': props<{ userToPlay: string }>(),
@@ -36,6 +40,10 @@ export const ChessActions = createActionGroup({
 
         'Remove Guest From Store': emptyProps(),
         'Disconnect Guest': emptyProps(),
+
+        'Quit Game': emptyProps(),
+        'Quit Game Sucess': emptyProps(),
+        'Quit Game Failure': emptyProps(),
 
 
         'Create Game Session': emptyProps(),

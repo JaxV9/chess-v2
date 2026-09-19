@@ -1,8 +1,8 @@
-import { Injectable, computed, inject } from '@angular/core';
+import { Injectable, computed, effect, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChessPiece } from "../models/models"
 import { ChessActions } from './chess.actions';
-import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectHistory, selectLoadGuestLoading, selectLoadInfosLoading, selectPlayers, selectUserToPlay, selectWaitingPlayer } from './chess.selectors';
+import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectHasLeftGame, selectHistory, selectLoadGuestLoading, selectLoadInfosLoading, selectPlayers, selectUserToPlay, selectWaitingPlayer } from './chess.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -15,6 +15,7 @@ export class ChessFacade {
     history = toSignal(this.store.select(selectHistory));
     players = toSignal(this.store.select(selectPlayers));
     gameSession = toSignal(this.store.select(selectGetGameSession));
+    hasLeftGame = toSignal(this.store.select(selectHasLeftGame));
     guest = toSignal(this.store.select(selectGuest));
     createGuestLoading = toSignal(this.store.select(selectCreateGuestLoading));
     disconnectGuestLoading = toSignal(this.store.select(selectDisconnectGuestLoading));
@@ -29,6 +30,10 @@ export class ChessFacade {
         const players = this.players();
         if (!players) return undefined;
         return players.find((player) => player.username !== currentPlayer)
+    })
+
+    test = effect(() => {
+        console.log(this.hasLeftGame())
     })
 
     currentPlayer = computed(() => {
@@ -70,6 +75,10 @@ export class ChessFacade {
 
     loadInfos() {
         this.store.dispatch(ChessActions.loadInfos());
+    }
+
+    quitGame() {
+        this.store.dispatch(ChessActions.quitGame())
     }
 
     disconnectGuest() {

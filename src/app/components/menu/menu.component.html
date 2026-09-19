@@ -17,6 +17,7 @@
                         <button class="locked">🔒 Play locally with an AI</button>
                     } @else {
                         <button (click)="chessFacade.resumeGame()">Resume game</button>
+                        <button (click)="chessFacade.quitGame()">Quit game</button>
                     }
                     <button (click)="chessFacade.disconnectGuest()">Disconnect</button>
                 }

@@ -9,6 +9,7 @@ export interface ChessState {
   game_session: string | undefined;
   guest: Guest | undefined;
   loadingStates: LoadingStates;
+  hasLeftGame: boolean,
   gameIsStarted: boolean;
   displaySharedBanner: boolean;
   waitingPlayer: boolean;
@@ -27,6 +28,7 @@ export const initialState: ChessState = {
     disconnectGuestLoading: false,
     getInfosLoading: true,
   },
+  hasLeftGame: false,
   gameIsStarted: false,
   displaySharedBanner: false,
   waitingPlayer: false,
@@ -87,6 +89,23 @@ export const chessReducer = createReducer(
       getInfosLoading: false,
     }
   })),
+  on(ChessActions.quitGameSucess, (state) => ({
+    ...state,
+    pieces: [],
+    history: [],
+    game_session: undefined,
+    players: undefined
+  })),
+  on(ChessActions.setHasLeftGame, (state) => ({
+    ...state,
+    hasLeftGame: true,
+    gameIsStarted: false,
+    game_session: undefined,
+  })),
+  on(ChessActions.setHasLeftGameReset, (state) => ({
+    ...state,
+    hasLeftGame: false
+  })),
   on(ChessActions.disconnectGuest, () => ({
     pieces: [],
     history: [],
@@ -98,6 +117,7 @@ export const chessReducer = createReducer(
       disconnectGuestLoading: false,
       getInfosLoading: false,
     },
+    hasLeftGame: false,
     gameIsStarted: false,
     displaySharedBanner: false,
     waitingPlayer: false,
