@@ -30,4 +30,20 @@ export class ChessboardComponent {
     }
     return `${style} waiting-container`
   });
+
+  getHorizontalLabels = computed(() => {
+    const list = ["a", "b", "c", "d", "e", "f", "g", "h"];
+    if (this.chessFacade.currentPlayer().color === "black") {
+      return list.reverse()
+    }
+    return list
+  })
+
+  getVerticalLabels = computed(() => {
+    const list = ["1", "2", "3", "4", "5", "6", "7", "8"];
+    if (this.chessFacade.currentPlayer().color === "black") {
+      return list
+    }
+    return list.reverse()
+  })
 }

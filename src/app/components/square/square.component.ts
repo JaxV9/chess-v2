@@ -17,6 +17,10 @@ export class SquareComponent {
 
   currentIndex = input.required<number>();
 
+  shouldRotate = computed(() => {
+    return this.chessFacade.currentPlayer().color === "black";
+  })
+
   constructor() {
     effect(() => {
       this.squareService.index.set(this.currentIndex());

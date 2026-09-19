@@ -1,18 +1,17 @@
 :host {
-
-        .container {
-            display: flex;
-            height: 100vh;
-            width: 100%;
-        }
-
-        .chessboard {
-            width: 100%;
-        }
-
-        button {
-            width: fit-content;
-            height: fit-content;
-            font-size: 14px;
-        }
+    .container {
+        display: flex;
+        height: 100vh;
+        width: 100%;
     }
+
+    .chessboard {
+        width: 100%;
+    }
+
+    button {
+        width: fit-content;
+        height: fit-content;
+        font-size: 14px;
+    }
+}

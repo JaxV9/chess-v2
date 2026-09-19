@@ -14,4 +14,15 @@
         </div>
         }
     </div>
+    <div class="horizontal-labels-container">
+        @for (label of getHorizontalLabels(); track $index) {
+            <span>{{label}}</span>
+        }
+    </div>
+
+    <div class="vertical-labels-container">
+        @for (label of getVerticalLabels(); track $index) {
+            <span>{{label}}</span>
+        }
+    </div>
 </div>

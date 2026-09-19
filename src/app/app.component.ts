@@ -6,12 +6,11 @@ import { GameInfosComponent } from './components/game-infos/game-infos.component
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ShareComponent } from './components/share/share.component';
 import { HistoryComponent } from './components/history/history.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ChessboardComponent, MenuComponent, GameInfosComponent, ShareComponent, HistoryComponent],
+  imports: [ChessboardComponent, MenuComponent, GameInfosComponent, HistoryComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -136,7 +136,7 @@ export class SquareService {
   public previewManager(): string {
     if (!this.currentSquareIsInPreview()) {
       if (this.isLastMouvement()) {
-        return 'square-history preview';
+        return 'square-history preview-history';
       }
       return '';
     }
