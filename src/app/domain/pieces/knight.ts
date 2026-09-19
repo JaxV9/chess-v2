@@ -8,7 +8,7 @@ import { ChessFacade } from "../../store/chess.facade";
 export class Knight {
     chessFacade = inject(ChessFacade);
 
-    private moves(chessPiece: ChessPiece) {
+    preview(chessPiece: ChessPiece) {
         const chessPieces = this.chessFacade.chessPieces();
         const index = chessPiece.pos
         let previews: number[] = []
@@ -46,9 +46,5 @@ export class Knight {
         });
 
         return previews;
-    }
-
-    public preview(chessPiece: ChessPiece): number[] {
-        return this.moves(chessPiece)
     }
 }

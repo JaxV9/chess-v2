@@ -8,7 +8,7 @@ import { ChessFacade } from "../../store/chess.facade";
 export class Bishop {
     chessFacade = inject(ChessFacade);
 
-    private moves(index: number) {
+    private trajectories(index: number) {
         const diagonals: number[] = [];
         for (let i = index + 7, j = 0; i <= 64 && i >= 0; i += 8, j--) {
             if ((i + j) % 8 === 0) {
@@ -51,7 +51,7 @@ export class Bishop {
 
     public preview(currentPiece: ChessPiece) {
         const allPieces = this.chessFacade.chessPieces();
-        let previews = this.moves(currentPiece.pos);
+        let previews = this.trajectories(currentPiece.pos);
 
         allPieces?.map((piece) => {
             if (previews.includes(piece.pos)) {

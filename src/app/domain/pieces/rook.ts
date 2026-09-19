@@ -8,7 +8,7 @@ import { ChessPiece } from "../../models/models";
 export class Rook {
     chessFacade = inject(ChessFacade);
 
-    private moves(index: number): number[] {
+    private trajectories(index: number): number[] {
         const lines: number[] = [];
         for (let i = index + 8; i <= 64 && i >= 0; i += 8) {
             lines.push(i);
@@ -42,7 +42,7 @@ export class Rook {
 
     public preview(currentPiece: ChessPiece): number[] {
         const allPieces = this.chessFacade.chessPieces();
-        let previews = this.moves(currentPiece.pos);
+        let previews = this.trajectories(currentPiece.pos);
 
         allPieces?.map((piece) => {
             if (previews.includes(piece.pos)) {
