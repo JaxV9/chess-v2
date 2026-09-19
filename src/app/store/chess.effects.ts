@@ -78,7 +78,7 @@ export class ChessEffects {
             ofType(ChessActions.createGameSession),
             switchMap(() => {
                 return this.httpService.createGameSession().pipe(
-                    delay(300),
+                    delay(1000),
                     switchMap((response) => of(
                         ChessActions.setGameSession({ game_session: response.game_session }),
                         ChessActions.startGame(),
