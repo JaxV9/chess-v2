@@ -117,15 +117,23 @@ export class SquareService {
     }
 
     if (this.currentSquareIsInPreview()) {
+      const isKing = pieceIsPreviewed.role?.startsWith('king');
+      const rookMove = isKing ? this.pieceService.king.getCastlingRookMove(pieceIsPreviewed.pos, index) : null;
+
       let chessPieces = this.chessFacade.chessPieces()?.map((piece) => {
+        // King move
         if (piece.id === pieceIsPreviewed.id) {
           return { ...piece, pos: index };
         }
-        return piece
+        // Castling rook move
+        if (rookMove && piece.pos === rookMove.from) {
+          return { ...piece, pos: rookMove.to };
+        }
+        return piece;
       });
 
-      if (!chessPieces) return
-      this.chessFacade.makeAMove(chessPieces)
+      if (!chessPieces) return;
+      this.chessFacade.makeAMove(chessPieces);
       this.chessBoardService.resetPreview();
 
       this.chessBoardService.pieceIsPreviewed.set(undefined);
