@@ -7,7 +7,9 @@ import { Bishop } from '../domain/pieces/bishop';
 import { Pawn } from '../domain/pieces/pawn';
 import { Rook } from '../domain/pieces/rook';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PieceService {
 
     king = inject(King);
@@ -32,11 +34,11 @@ export class PieceService {
         "rook_white": "pieces/rook-white.svg"
     }
 
-    getPieceImage(currentPiece: ChessPiece) {
-        if (currentPiece.role === null) {
+    getPieceImage(role: string) {
+        if (role === null) {
             return null
         }
-        const imageSrc = this.roles[currentPiece.role];
+        const imageSrc = this.roles[role];
 
         if (!imageSrc) {
             return null;

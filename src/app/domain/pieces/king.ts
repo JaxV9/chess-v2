@@ -38,10 +38,6 @@ export class King {
             !!this.chessFacade.chessPieces()?.find(piece => piece.id === "rook_w2");
     })
 
-    test = effect(() => {
-        console.log(this.chessFacade.chessPieces())
-    })
-
     areSquaresEmpty(squares: number[]): boolean {
         const chessPieces = this.chessFacade.chessPieces();
         return !chessPieces?.some(piece => squares.includes(piece.pos));
@@ -90,8 +86,8 @@ export class King {
         const moves: Record<number, { from: number, to: number }> = {
             63: { from: 64, to: 62 }, // White Kingside
             59: { from: 57, to: 60 }, // White Queenside
-            7:  { from: 8,  to: 6 },  // Black Kingside
-            3:  { from: 1,  to: 4 },  // Black Queenside
+            7: { from: 8, to: 6 },  // Black Kingside
+            3: { from: 1, to: 4 },  // Black Queenside
         };
 
         return moves[to] || null;

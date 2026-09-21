@@ -7,6 +7,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
+        width: 40%;
     }
 
     .opponent-container {
@@ -55,5 +56,19 @@
             text-align: center;
             font-weight: 500;
         }
+    }
+
+    .captured-pieces {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .rotate app-piece {
+        transform: rotate(180deg);
+    }
+
+    app-piece {
+        width: 32px;
     }
 }

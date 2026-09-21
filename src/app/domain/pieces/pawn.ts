@@ -1,6 +1,5 @@
 import { ChessPiece } from "../../models/models";
-import { PieceRole } from "../../constants/constants";
-import { computed, inject, Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { ChessFacade } from "../../store/chess.facade";
 
 @Injectable({

@@ -7,19 +7,25 @@
         <span>🛠️ The game is currently in development</span>
     </div>
     @if (chessFacade.opponent()) {
-        <span>Your opponent : {{chessFacade.opponent()?.username}}</span>
-        <!-- <span>Color : {{chessFacade.opponent()?.color}}</span> -->
+    <span>Your opponent : {{chessFacade.opponent()?.username}}</span>
     }
+    <div [class]="chessFacade.currentPlayer().color === 'white' ?  'captured-pieces' : 'captured-pieces rotate'">
+        @for (role of getOpponentPiecesCaptured(); track $index) {
+        <app-piece [currentRole]="getRole(role)" />
+        }
+    </div>
 </div>
 
 <div class="current-player-container">
+    <div [class]="chessFacade.currentPlayer().color === 'white' ?  'captured-pieces' : 'captured-pieces rotate'">
+        @for (role of getCurrentUserPiecesCaptured(); track $index) {
+        <app-piece [currentRole]="getRole(role)" />
+        }
+    </div>
     @if (chessFacade.gameSession()) {
-        <span>Game session : {{chessFacade.gameSession()}}</span>
+    <span>Game session : {{chessFacade.gameSession()}}</span>
     }
     @if (chessFacade.guest()) {
-        <span>Username : {{chessFacade.currentPlayer().username}}</span>
-        @if (chessFacade.currentPlayer().color) {
-            <!-- <span>Color : {{chessFacade.currentPlayer().color}}</span> -->
-        }
+    <span>Username : {{chessFacade.currentPlayer().username}}</span>
     }
 </div>

@@ -11,7 +11,7 @@ import { ChessFacade } from '../../store/chess.facade';
   styleUrl: './piece.component.css',
 })
 export class PieceComponent {
-  currentRole = input.required<ChessPiece>();
+  currentRole = input.required<string>();
   chessFacade = inject(ChessFacade);
   pieceService = inject(PieceService);
 

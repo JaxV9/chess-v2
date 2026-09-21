@@ -1,9 +1,9 @@
 <div (click)="squareService.makeAMove()" [class]="squareService.colorManager(currentIndex())">
     <div [class]="squareService.previewManager()">
     </div>
-    @if(squareService.currentChessPiece()){
+    @if(squareService.currentChessPiece()?.role){
         <div class="chess-piece-container">
-            <app-piece (click)="squareService.watchPreview()" [currentRole]="squareService.currentChessPiece()!" />
+            <app-piece (click)="squareService.watchPreview()" [currentRole]="squareService.currentChessPiece()!.role" />
         </div>
     }
 </div>

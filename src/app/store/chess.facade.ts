@@ -4,6 +4,7 @@ import { ChessPiece } from "../models/models"
 import { ChessActions } from './chess.actions';
 import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectHasLeftGame, selectHistory, selectLoadGuestLoading, selectLoadInfosLoading, selectPlayers, selectUserToPlay, selectWaitingPlayer } from './chess.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { pieceBlackIds, pieceWhiteIds } from '../constants/constants';
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,32 @@ export class ChessFacade {
         const players = this.players();
         if (!players) return undefined;
         return players.find((player) => player.username !== currentPlayer)
+    })
+
+    blackPiecesCaptured = computed(() => {
+        const chessPieces = this.chessPieces()
+        let capturedPieces: string[] = []
+
+        pieceBlackIds.map((pieceId) => {
+            if (chessPieces?.filter(piece => piece.id === pieceId).length === 0) {
+                capturedPieces.push(pieceId)
+            }
+        })
+
+        return capturedPieces;
+    })
+
+    whitePiecesCaptured = computed(() => {
+        const chessPieces = this.chessPieces()
+        let capturedPieces: string[] = []
+
+        pieceWhiteIds.map((pieceId) => {
+            if (chessPieces?.filter(piece => piece.id === pieceId).length === 0) {
+                capturedPieces.push(pieceId)
+            }
+        })
+
+        return capturedPieces;
     })
 
     currentPlayer = computed(() => {
