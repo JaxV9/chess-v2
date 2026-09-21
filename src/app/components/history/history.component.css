@@ -27,6 +27,12 @@
         font-weight: 600;
     }
 
+    .user-to-play {
+        padding: 0 16px 28px;
+        font-size: 18px; 
+        text-align: center;
+    }
+
     .history {
         display: flex;
         flex-direction: column;

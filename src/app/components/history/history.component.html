@@ -1,4 +1,5 @@
 <div class="container">
+    <span class="user-to-play">User to play : {{getUserToPlayColor()}}</span>
     <span class="label">Moves :</span>
     <div class="history" #historyContainer>
         @for (row of historyRows(); track row.turn) {

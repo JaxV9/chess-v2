@@ -57,4 +57,8 @@ export class HistoryComponent {
     return rows;
   });
 
+  getUserToPlayColor = computed(() => {
+    return this.chessFacade.players()?.find(player => player.username === this.chessFacade.userToPlay())?.color;
+  })
+
 }
