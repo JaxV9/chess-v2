@@ -70,19 +70,21 @@ export class SquareService {
   }
 
   watchPreview() {
-    if (this.chessFacade.currentPlayer()?.color !== this.currentChessPiece()?.color) return
-    if (!this.chessFacade.currentUserHaveToPlay()) return
+    if (this.chessFacade.currentPlayer()?.color !== this.currentChessPiece()?.color) return;
+    if (!this.chessFacade.currentUserHaveToPlay()) return;
 
     const currentChessPiece = this.currentChessPiece();
     if (!currentChessPiece) return;
 
-    const newPreview = this.pieceService.getPreview(currentChessPiece);
+    const rawPreview = this.pieceService.getPreview(currentChessPiece);
     const oldPreview = this.chessBoardService.squaresInPreview();
-    if (!newPreview) return;
+    if (!rawPreview) return;
+
+    const newPreview = this.pieceService.king.filterLegalMoves(currentChessPiece, rawPreview);
 
     this.chessBoardService.squaresInPreview.set([]);
     // reset the preview when we click on the same piece
-    if (JSON.stringify(oldPreview) === JSON.stringify(newPreview)) return
+    if (JSON.stringify(oldPreview) === JSON.stringify(newPreview)) return;
 
     if (newPreview !== oldPreview) {
       this.chessBoardService.squaresInPreview.set([...newPreview]);

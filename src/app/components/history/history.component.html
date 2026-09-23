@@ -1,17 +1,19 @@
 <div class="container">
     <span class="user-to-play">User to play : {{getUserToPlayColor()}}</span>
-    <span class="label">Moves :</span>
-    <div class="history" #historyContainer>
-        @for (row of historyRows(); track row.turn) {
-        <div class="history-row">
-            <span class="turn">{{ row.turn }}.</span>
-            <span class="move" [class.active]="row.white.isLast">{{ row.white.notation }}</span>
-            @if (row.black) {
-            <span class="move" [class.active]="row.black.isLast">{{ row.black.notation }}</span>
-            } @else {
-            <span class="move empty"></span>
+    @if (historyRows().length >= 1) {
+        <span class="label">Moves :</span>
+        <div class="history" #historyContainer>
+            @for (row of historyRows(); track row.turn) {
+                <div class="history-row">
+                    <span class="turn">{{ row.turn }}.</span>
+                    <span class="move" [class.active]="row.white.isLast">{{ row.white.notation }}</span>
+                    @if (row.black) {
+                    <span class="move" [class.active]="row.black.isLast">{{ row.black.notation }}</span>
+                    } @else {
+                    <span class="move empty"></span>
+                    }
+                </div>
             }
         </div>
-        }
-    </div>
+    }
 </div>

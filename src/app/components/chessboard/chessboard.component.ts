@@ -2,6 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { SquareComponent } from '../square/square.component';
 import { ChessFacade } from '../../store/chess.facade';
 import { ShareComponent } from '../share/share.component';
+import { King } from '../../domain/pieces/king';
 
 @Component({
   selector: 'app-chessboard',
@@ -11,6 +12,7 @@ import { ShareComponent } from '../share/share.component';
 })
 export class ChessboardComponent {
   chessFacade = inject(ChessFacade);
+  king = inject(King);
   squares = Array.from({ length: 64 }, (_, i) => i + 1);
 
   getChessBoardClass = computed(() => {
