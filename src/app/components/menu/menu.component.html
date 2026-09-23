@@ -7,6 +7,9 @@
                 <mat-spinner diameter="50" />
             } @else {
                 @if (!isGuestOrLogged()) {
+                    @if (!haveGameSession()) {
+                        <span class="label">You should to play as a guest or login, before playing</span>
+                    }
                     <button (click)="chessFacade.createGuest()">Play as a guest</button>
                     <button class="locked">🔒 Login</button>
                     <button class="locked">🔒 Create account</button>
