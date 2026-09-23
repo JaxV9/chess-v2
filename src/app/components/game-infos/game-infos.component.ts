@@ -13,17 +13,25 @@ export class GameInfosComponent {
   chessFacade = inject(ChessFacade);
 
   getCurrentUserPiecesCaptured = computed(() => {
-    if (this.chessFacade.currentPlayer().color === "black") {
+    const currentPlayer = this.chessFacade.currentPlayer();
+    if (!currentPlayer.color) return [];
+    if (currentPlayer.color === "black") {
       return this.chessFacade.whitePiecesCaptured();
     }
     return this.chessFacade.blackPiecesCaptured();
   })
 
   getOpponentPiecesCaptured = computed(() => {
-    if (this.chessFacade.opponent()?.color === "black") {
+    const opponent = this.chessFacade.opponent();
+    if (!opponent) return [];
+    if (opponent.color === "black") {
       return this.chessFacade.whitePiecesCaptured();
     }
     return this.chessFacade.blackPiecesCaptured();
+  })
+
+  test = effect(() => {
+    console.log(this.getOpponentPiecesCaptured())
   })
 
   getRole(id: string): string {
