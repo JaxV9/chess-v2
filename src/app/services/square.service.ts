@@ -33,6 +33,7 @@ export class SquareService {
   })
 
   currentSquareIsInPreview = computed(() => {
+    if (this.chessFacade.makeAMoveLoading()) return false;
     const index = this.index();
     if (!index) return;
     return this.chessBoardService.squaresInPreview().includes(index);
@@ -70,6 +71,7 @@ export class SquareService {
   }
 
   watchPreview() {
+    if (this.chessFacade.makeAMoveLoading()) return;
     if (this.chessFacade.currentPlayer()?.color !== this.currentChessPiece()?.color) return;
     if (!this.chessFacade.currentUserHaveToPlay()) return;
 
@@ -93,6 +95,7 @@ export class SquareService {
   }
 
   makeAMove() {
+    if (this.chessFacade.makeAMoveLoading()) return;
     if (!this.chessFacade.currentUserHaveToPlay()) return
     const index = this.index();
     const pieceIsPreviewed = this.chessBoardService.pieceIsPreviewed();

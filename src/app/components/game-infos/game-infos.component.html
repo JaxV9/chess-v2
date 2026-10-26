@@ -3,9 +3,6 @@
 </div>
 
 <div class="opponent-container">
-    <div class="development-status">
-        <span>🛠️ The game is currently in development</span>
-    </div>
     @if (chessFacade.opponent()) {
         <span>Your opponent : {{chessFacade.opponent()?.username}}</span>
         <div [class]="chessFacade.currentPlayer().color === 'white' ?  'captured-pieces' : 'captured-pieces rotate'">

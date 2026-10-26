@@ -67,3 +67,13 @@ export const selectHasLeftGame = createSelector(
   selectChessState,
   (state) => state?.hasLeftGame
 )
+
+export const selectMakeAMoveLoading = createSelector(
+  selectChessState,
+  (state) => state?.loadingStates.makeAMoveLoading ?? false
+);
+
+export const selectJoinGameSessionLoading = createSelector(
+  selectChessState,
+  (state) => state?.loadingStates.joinGameSessionLoading ?? false
+);

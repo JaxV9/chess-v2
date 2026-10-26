@@ -11,13 +11,32 @@
                         <span class="label">You should to play as a guest or login, before playing</span>
                     }
                     <button (click)="chessFacade.createGuest()">Play as a guest</button>
-                    <button class="locked">🔒 Login</button>
-                    <button class="locked">🔒 Create account</button>
                 }
                 @if(isGuestOrLogged()) {
                     @if (!haveGameSession()) {
-                        <button (click)="chessFacade.createGameSession()">Play online with another player</button>
-                        <button class="locked">🔒 Play locally with an AI</button>
+                            <button (click)="chessFacade.createGameSession()">Play online with another player</button>
+                        <div class="code-container">
+                            <input
+                                type="text"
+                                placeholder="Enter game code"
+                                aria-label="Game session code"
+                                [value]="sessionCode()"
+                                (input)="onCodeChange($event)"
+                                (keydown.enter)="joinGameSession()"
+                                [disabled]="chessFacade.joinGameSessionLoading()"
+                            >
+                            <button
+                                (click)="joinGameSession()"
+                                [disabled]="!sessionCode().trim() || chessFacade.joinGameSessionLoading()"
+                                aria-label="Join game session"
+                            >
+                                @if (chessFacade.joinGameSessionLoading()) {
+                                    <span class="btn-spinner"></span>
+                                } @else {
+                                    Join
+                                }
+                            </button>
+                        </div>
                     } @else {
                         <button (click)="chessFacade.resumeGame()">Resume game</button>
                         <button (click)="chessFacade.quitGame()">Quit game</button>

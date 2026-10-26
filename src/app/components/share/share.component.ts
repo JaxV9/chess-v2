@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { ChessFacade } from '../../store/chess.facade';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { DOCUMENT } from '@angular/common';
@@ -12,14 +12,29 @@ import { DOCUMENT } from '@angular/common';
 export class ShareComponent {
   chessFacade = inject(ChessFacade);
   clipboard = inject(Clipboard);
-  document = inject(DOCUMENT);
 
-  shareBtnText = signal<string>("Share the link with a friend");
+  label = input<string>();
+  value = input<string>();
+  confirmation = input<string>();
+  icon = input<string>();
+
+  shareBtnText = signal<string>('');
+
+  constructor() {
+    effect(() => {
+      const label = this.label()
+      if (label) {
+        this.shareBtnText.set(label)
+      }
+    })
+  }
 
   copyToClipBoard() {
-    const gameSession = this.chessFacade.gameSession();
-    const baseUrl = this.document.location.origin;
-    this.clipboard.copy(`${baseUrl}?gamesession=${gameSession}`)
-    this.shareBtnText.set('Link copied')
+    const value = this.value();
+    const confirmation = this.confirmation();
+    if (!value) return;
+    this.clipboard.copy(value);
+    if (!confirmation) return;
+    this.shareBtnText.set(confirmation)
   }
 }

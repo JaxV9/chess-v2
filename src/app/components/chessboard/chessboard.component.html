@@ -1,6 +1,19 @@
 <div class="chessboard-wrapper">
     @if (chessFacade.waitingPlayer()) {
-        <app-share />
+        <div class="share-container">
+            <app-share
+                label="Share the link with a friend"
+                [value]="getUrlToCopy()"
+                confirmation="Link copied"
+                icon="share"
+                />
+            <app-share
+                label="Share the code with a friend"
+                [value]="chessFacade.gameSession()"
+                confirmation="Code copied"
+                icon="key"
+                />
+        </div>
     }
     <div [class]="getChessBoardClass()">
         <div class="chessboard-content">
@@ -11,6 +24,12 @@
         @if (chessFacade.waitingPlayer()) {
             <div [class]="getWaitingClass()">
                 <span>Waiting for a second player..</span>
+            </div>
+        }
+        @if (chessFacade.makeAMoveLoading()) {
+            <div [class]="getMoveLoadingClass()">
+                <mat-spinner diameter="48" />
+                <span>Move in progress...</span>
             </div>
         }
         @if(king.isBlackInCheckmate()) {

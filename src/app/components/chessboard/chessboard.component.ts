@@ -1,18 +1,21 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, DOCUMENT, inject } from '@angular/core';
 import { SquareComponent } from '../square/square.component';
 import { ChessFacade } from '../../store/chess.facade';
 import { ShareComponent } from '../share/share.component';
 import { King } from '../../domain/pieces/king';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-chessboard',
-  imports: [SquareComponent, ShareComponent],
+  imports: [SquareComponent, ShareComponent, MatProgressSpinnerModule],
   templateUrl: './chessboard.component.html',
   styleUrl: './chessboard.component.css'
 })
 export class ChessboardComponent {
   chessFacade = inject(ChessFacade);
   king = inject(King);
+  document = inject(DOCUMENT);
+
   squares = Array.from({ length: 64 }, (_, i) => i + 1);
 
   getChessBoardClass = computed(() => {
@@ -33,6 +36,15 @@ export class ChessboardComponent {
     return `${style} waiting-container`
   });
 
+  getMoveLoadingClass = computed(() => {
+    let style = "";
+    const currentPlayer = this.chessFacade.currentPlayer();
+    if (currentPlayer.color === "black") {
+      style = "rotate"
+    }
+    return `${style} move-loader-container`
+  });
+
   getHorizontalLabels = computed(() => {
     const list = ["a", "b", "c", "d", "e", "f", "g", "h"];
     if (this.chessFacade.currentPlayer().color === "black") {
@@ -47,5 +59,11 @@ export class ChessboardComponent {
       return list
     }
     return list.reverse()
+  })
+
+  getUrlToCopy = computed(() => {
+    const gameSession = this.chessFacade.gameSession();
+    const baseUrl = this.document.location.origin;
+    return `${baseUrl}?gamesession=${gameSession}`;
   })
 }

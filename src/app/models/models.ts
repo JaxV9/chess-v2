@@ -49,6 +49,8 @@ export interface LoadingStates {
     loadGuestLoading: boolean,
     disconnectGuestLoading: boolean,
     getInfosLoading: boolean,
+    makeAMoveLoading: boolean,
+    joinGameSessionLoading: boolean,
 }
 
 export interface ChessHistory {

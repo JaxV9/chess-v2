@@ -2,7 +2,7 @@ import { Injectable, computed, effect, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChessPiece } from "../models/models"
 import { ChessActions } from './chess.actions';
-import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectHasLeftGame, selectHistory, selectLoadGuestLoading, selectLoadInfosLoading, selectPlayers, selectUserToPlay, selectWaitingPlayer } from './chess.selectors';
+import { selectChessPieces, selectCreateGuestLoading, selectDisconnectGuestLoading, selectGameIsStarted, selectGetGameSession, selectGuest, selectHasLeftGame, selectHistory, selectJoinGameSessionLoading, selectLoadGuestLoading, selectLoadInfosLoading, selectMakeAMoveLoading, selectPlayers, selectUserToPlay, selectWaitingPlayer } from './chess.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { pieceBlackIds, pieceWhiteIds } from '../constants/constants';
 
@@ -22,6 +22,8 @@ export class ChessFacade {
     disconnectGuestLoading = toSignal(this.store.select(selectDisconnectGuestLoading));
     loadGuestLoading = toSignal(this.store.select(selectLoadGuestLoading));
     loadInfosLoading = toSignal(this.store.select(selectLoadInfosLoading));
+    makeAMoveLoading = toSignal(this.store.select(selectMakeAMoveLoading), { initialValue: false });
+    joinGameSessionLoading = toSignal(this.store.select(selectJoinGameSessionLoading), { initialValue: false });
     gameIsStarted = toSignal(this.store.select(selectGameIsStarted));
     waitingPlayer = toSignal(this.store.select(selectWaitingPlayer));
     userToPlay = toSignal(this.store.select(selectUserToPlay));

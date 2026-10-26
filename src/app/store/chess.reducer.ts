@@ -27,6 +27,8 @@ export const initialState: ChessState = {
     loadGuestLoading: false,
     disconnectGuestLoading: false,
     getInfosLoading: true,
+    makeAMoveLoading: false,
+    joinGameSessionLoading: false,
   },
   hasLeftGame: false,
   gameIsStarted: false,
@@ -41,7 +43,11 @@ export const chessReducer = createReducer(
   initialState,
   on(ChessActions.setChessPieces, (state, { pieces }) => ({
     ...state,
-    pieces: pieces ? [...pieces] : []
+    pieces: pieces ? [...pieces] : [],
+    loadingStates: {
+      ...state.loadingStates,
+      makeAMoveLoading: false,
+    }
   })),
   on(ChessActions.setHistory, (state, { history }) => ({
     ...state,
@@ -116,6 +122,8 @@ export const chessReducer = createReducer(
       loadGuestLoading: false,
       disconnectGuestLoading: false,
       getInfosLoading: false,
+      makeAMoveLoading: false,
+      joinGameSessionLoading: false,
     },
     hasLeftGame: false,
     gameIsStarted: false,
@@ -153,5 +161,33 @@ export const chessReducer = createReducer(
   on(ChessActions.pauseGame, (state) => ({
     ...state,
     gameIsStarted: false
+  })),
+  on(ChessActions.makeAMove, (state) => ({
+    ...state,
+    loadingStates: {
+      ...state.loadingStates,
+      makeAMoveLoading: true,
+    }
+  })),
+  on(ChessActions.makeAMoveSuccess, ChessActions.makeAMoveFailure, ChessActions.syncWsChessPiecesError, (state) => ({
+    ...state,
+    loadingStates: {
+      ...state.loadingStates,
+      makeAMoveLoading: false,
+    }
+  })),
+  on(ChessActions.joinGameSession, (state) => ({
+    ...state,
+    loadingStates: {
+      ...state.loadingStates,
+      joinGameSessionLoading: true,
+    }
+  })),
+  on(ChessActions.joinGameSessionSuccess, ChessActions.joinGameSessionFailure, (state) => ({
+    ...state,
+    loadingStates: {
+      ...state.loadingStates,
+      joinGameSessionLoading: false,
+    }
   })),
 );
